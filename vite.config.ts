@@ -4,6 +4,8 @@ import { VitePWA } from 'vite-plugin-pwa'
 
 // https://vite.dev/config/
 export default defineConfig({
+  // 1. AÑADIMOS LA BASE AQUÍ (Fundamental para GitHub Pages)
+  base: '/Germalearn-App/',
   plugins: [
     react(),
     VitePWA({
@@ -16,7 +18,8 @@ export default defineConfig({
         theme_color: '#1a1a1a',
         background_color: '#1a1a1a',
         display: 'standalone',
-        start_url: '/',
+        // 2. AJUSTAMOS EL START_URL (Para que la PWA sepa dónde empezar en el servidor)
+        start_url: '/Germalearn-App/',
         icons: [
           {
             src: 'pwa-192x192.png',
