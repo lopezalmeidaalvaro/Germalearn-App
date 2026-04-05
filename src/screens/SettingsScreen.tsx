@@ -6,6 +6,7 @@ import Card from '../components/ui/Card';
 import Button from '../components/ui/Button';
 
 import { calculateLevel, getRankTitle, getXPRequiredForLevel } from '../context/GameContext'; // Import helpers
+import { useTranslation } from '../i18n/translations';
 
 const SettingsScreen = () => {
     const context = useContext(GameContext);
@@ -13,6 +14,8 @@ const SettingsScreen = () => {
     const { state, dispatch } = context;
 
     const isDark = state.user?.theme === 'dark';
+    const baseLang = state.user?.baseLanguage ?? 'en';
+    const t = useTranslation();
     const [pass, setPass] = useState('');
     const [apiKey, setApiKey] = useState(AITutorService.getApiKey() || '');
     const [msg, setMsg] = useState('');
@@ -98,6 +101,36 @@ const SettingsScreen = () => {
                         <button onClick={() => dispatch({ type: 'UPDATE_SETTINGS', theme: isDark ? 'light' : 'dark' })} className={`w-14 h-8 rounded-full p-1 transition-colors ${isDark ? 'bg-indigo-600' : 'bg-gray-300'}`}>
                             <div className={`w-6 h-6 bg-white rounded-full shadow-md transform transition-transform ${isDark ? 'translate-x-6' : 'translate-x-0'}`} />
                         </button>
+                    </Card>
+
+                    {/* Language Selector */}
+                    <Card className={`flex items-center justify-between ${cardClass}`}>
+                        <div>
+                            <p className="font-bold">{t.preferredLanguage}</p>
+                            <p className="text-xs opacity-70">{t.preferredLanguageDesc}</p>
+                        </div>
+                        <div className="flex gap-2">
+                            <button
+                                onClick={() => dispatch({ type: 'UPDATE_BASE_LANGUAGE', lang: 'en' })}
+                                className={`flex items-center gap-1.5 px-3 py-2 rounded-xl font-bold text-sm transition-all border-2 ${
+                                    baseLang === 'en'
+                                        ? 'bg-indigo-600 text-white border-indigo-600 shadow-md shadow-indigo-200 dark:shadow-indigo-900'
+                                        : isDark ? 'bg-gray-800 text-gray-400 border-gray-700 hover:border-indigo-500' : 'bg-gray-100 text-gray-500 border-gray-200 hover:border-indigo-300'
+                                }`}
+                            >
+                                <span className="text-base">🇺🇸</span> English
+                            </button>
+                            <button
+                                onClick={() => dispatch({ type: 'UPDATE_BASE_LANGUAGE', lang: 'es' })}
+                                className={`flex items-center gap-1.5 px-3 py-2 rounded-xl font-bold text-sm transition-all border-2 ${
+                                    baseLang === 'es'
+                                        ? 'bg-indigo-600 text-white border-indigo-600 shadow-md shadow-indigo-200 dark:shadow-indigo-900'
+                                        : isDark ? 'bg-gray-800 text-gray-400 border-gray-700 hover:border-indigo-500' : 'bg-gray-100 text-gray-500 border-gray-200 hover:border-indigo-300'
+                                }`}
+                            >
+                                <span className="text-base">🇪🇸</span> Español
+                            </button>
+                        </div>
                     </Card>
 
                     {/* Change Password */}

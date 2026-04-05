@@ -75,6 +75,7 @@ export interface UserProfile {
     maxHearts: number;
     mistakesInbox: ChunkId[];
     theme: 'light' | 'dark';
+    baseLanguage: 'en' | 'es';
     lastPracticeDate: string; // ISO Date YYYY-MM-DD
     completedNodes: string[];
     nextHeartRefill?: number;
@@ -136,4 +137,5 @@ export type Action =
     | { type: 'UNLOCK_ADMIN' }
     | { type: 'CLOSE_LEVEL_UP_MODAL' }
     | { type: 'OPEN_EXAM_B1' }
-    | { type: 'UPDATE_STREAK' };
+    | { type: 'UPDATE_STREAK' }
+    | { type: 'UPDATE_BASE_LANGUAGE', lang: 'en' | 'es' };

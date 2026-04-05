@@ -4,6 +4,7 @@ import { GameContext } from '../../context/GameContext';
 import type { Chunk } from '../../types';
 import { useAudio } from '../../hooks/useAudio';
 import GermanTextRenderer from '../GermanTextRenderer';
+import { useTranslation } from '../../i18n/translations';
 
 const FlashcardView = ({ chunk, onNext }: { chunk: Chunk, onNext: () => void }) => {
     // FIX: Direct context access for theme
@@ -15,6 +16,7 @@ const FlashcardView = ({ chunk, onNext }: { chunk: Chunk, onNext: () => void }) 
     const frontText = isDark ? 'text-white' : 'text-gray-900';
     const backClass = isDark ? 'bg-gray-900 border-indigo-500' : 'bg-indigo-50 border-indigo-200';
     const backText = isDark ? 'text-white' : 'text-gray-900';
+    const t = useTranslation();
 
     const [isFlipped, setIsFlipped] = useState(false);
     const { speak } = useAudio();
@@ -31,7 +33,7 @@ const FlashcardView = ({ chunk, onNext }: { chunk: Chunk, onNext: () => void }) 
                 <div className={`absolute w-full h-full rounded-3xl shadow-xl flex flex-col items-center justify-center p-6 border-2 [backface-visibility:hidden] ${frontClass}`}>
                     <span className="text-4xl mb-4">🇪🇸</span>
                     <p className={`text-xl font-bold text-center ${frontText}`}>{chunk.spanish}</p>
-                    <p className="text-xs text-gray-500 mt-8 absolute bottom-6">Toca para voltear</p>
+                    <p className="text-xs text-gray-500 mt-8 absolute bottom-6">{t.tapToFlip}</p>
                 </div>
                 {/* Dorso */}
                 <div className={`absolute w-full h-full rounded-3xl shadow-xl flex flex-col items-center justify-center p-6 border-2 [backface-visibility:hidden] rotate-y-180 ${backClass}`}>
@@ -40,7 +42,7 @@ const FlashcardView = ({ chunk, onNext }: { chunk: Chunk, onNext: () => void }) 
                     <GermanTextRenderer text={chunk.german} size="xl" className={`text-center ${backText}`} />
                 </div>
             </div>
-            {isFlipped && <button onClick={(e) => { e.stopPropagation(); onNext(); }} className="mt-8 bg-indigo-600 text-white px-8 py-3 rounded-xl font-bold shadow-lg animate-in fade-in slide-in-from-bottom-4">Siguiente</button>}
+            {isFlipped && <button onClick={(e) => { e.stopPropagation(); onNext(); }} className="mt-8 bg-indigo-600 text-white px-8 py-3 rounded-xl font-bold shadow-lg animate-in fade-in slide-in-from-bottom-4">{t.next}</button>}
         </div>
     );
 };

@@ -69,6 +69,7 @@ function appReducer(state: AppState, action: Action): AppState {
             // Migration: Ensure streak properties exist
             if (typeof user.streak !== 'number') user.streak = 0;
             if (!user.lastPracticeDate) user.lastPracticeDate = '2000-01-01'; // Old date to start fresh
+            if (!user.baseLanguage) user.baseLanguage = 'en'; // Migration: default to English
 
             if (!action.data.user) return { ...state, isAuthenticated: true, screen: 'dashboard', user: user, mastery: action.data.mastery };
 
@@ -113,6 +114,9 @@ function appReducer(state: AppState, action: Action): AppState {
         case 'UNLOCK_ADMIN': newState = { ...state, isAdminMode: true }; break;
         case 'UPDATE_SETTINGS':
             if (state.user) newState = { ...state, user: { ...state.user, theme: action.theme } };
+            break;
+        case 'UPDATE_BASE_LANGUAGE':
+            if (state.user) newState = { ...state, user: { ...state.user, baseLanguage: action.lang } };
             break;
         case 'CHANGE_PASSWORD':
             if (state.user) {

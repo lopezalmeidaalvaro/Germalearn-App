@@ -21,7 +21,7 @@ export class AITutorService {
         return localStorage.getItem('gemini_api_key') || import.meta.env.VITE_GEMINI_API_KEY || '';
     }
 
-    static async evaluateCreative(sentence: string, targets: any, providedKey?: string): Promise<ValidationResult> {
+    static async evaluateCreative(sentence: string, targets: any, providedKey?: string, baseLanguage: 'en' | 'es' = 'es'): Promise<ValidationResult> {
         // 1. Recuperación robusta de la clave (Prioridad: Argumento -> LocalStorage -> Env)
         let token = providedKey;
         if (!token) {
@@ -54,7 +54,13 @@ export class AITutorService {
         if (targetWords.length === 0) throw new Error("Error técnico: Sin palabras clave.");
 
         // 4. Generación de Prompt
+        const langInstruction = baseLanguage === 'en'
+            ? 'The user\'s native language is English. Provide ALL feedback, explanations, and corrections in English.'
+            : 'El idioma nativo del usuario es Español. Proporciona TODOS los comentarios, explicaciones y correcciones en Español.';
+
         const prompt = `
+        ${langInstruction}
+
         Actúa como un profesor de alemán experto y pedagógico.
         
         CONTEXTO:
@@ -101,13 +107,19 @@ export class AITutorService {
         }
     }
 
-    static async evaluateExamTask(text: string, taskContext: string, providedKey?: string): Promise<ValidationResult> {
+    static async evaluateExamTask(text: string, taskContext: string, providedKey?: string, baseLanguage: 'en' | 'es' = 'es'): Promise<ValidationResult> {
         let token = providedKey || AITutorService.getApiKey();
         const finalKey = token ? token.trim() : "";
 
         if (!finalKey) throw new Error("⚠️ No hay API Key. Configúrala en Ajustes.");
 
+        const langInstruction = baseLanguage === 'en'
+            ? 'The user\'s native language is English. Provide ALL feedback, corrections and explanations in English.'
+            : 'El idioma nativo del usuario es Español. Proporciona TODOS los comentarios y correcciones en Español.';
+
         const prompt = `
+        ${langInstruction}
+
         Actúa como un profesor de alemán del Nivel B1 (Examen Oficial).
         
         TAREA DEL ALUMNO:
