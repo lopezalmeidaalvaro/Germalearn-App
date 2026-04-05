@@ -2,10 +2,16 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { VitePWA } from 'vite-plugin-pwa'
 
-// https://vite.dev/config/
+// Lógica de detección de entorno
+const isVercel = process.env.VERCEL === '1';
+const isProduction = process.env.NODE_ENV === 'production';
+
+// Si es producción pero NO es Vercel, asumimos que es GitHub Pages (subcarpeta)
+// En cualquier otro caso (Vercel o Local), usamos la raíz '/'
+const baseRoute = (isProduction && !isVercel) ? '/Germalearn-App/' : '/';
+
 export default defineConfig({
-  // 1. AÑADIMOS LA BASE AQUÍ (Fundamental para GitHub Pages)
-  base: '/Germalearn-App/',
+  base: baseRoute,
   plugins: [
     react(),
     VitePWA({
@@ -18,8 +24,7 @@ export default defineConfig({
         theme_color: '#1a1a1a',
         background_color: '#1a1a1a',
         display: 'standalone',
-        // 2. AJUSTAMOS EL START_URL (Para que la PWA sepa dónde empezar en el servidor)
-        start_url: '/Germalearn-App/',
+        start_url: baseRoute, // Usamos la misma lógica aquí
         icons: [
           {
             src: 'pwa-192x192.png',
@@ -34,7 +39,7 @@ export default defineConfig({
         ]
       },
       workbox: {
-        maximumFileSizeToCacheInBytes: 20 * 1024 * 1024, // 20 MB to support large audio files
+        maximumFileSizeToCacheInBytes: 20 * 1024 * 1024,
         globPatterns: ['**/*.{js,css,html,ico,png,svg,mp3}'],
         runtimeCaching: [
           {
