@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import { Brain, User, Lock } from 'lucide-react';
 import { GameContext } from '../context/GameContext';
 import { StorageManager } from '../logic/storage';
+import { useTranslation } from '../i18n/translations';
 
 const defaultUser = {
     username: 'Guest',
@@ -17,6 +18,7 @@ const defaultUser = {
 
 const AuthScreen = () => {
     const context = useContext(GameContext);
+    const t = useTranslation();
     if (!context) return null;
     const { dispatch } = context;
 
@@ -28,16 +30,16 @@ const AuthScreen = () => {
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         setError('');
-        if (!username.trim() || !password.trim()) { setError('Completa los campos'); return; }
+        if (!username.trim() || !password.trim()) { setError(t.fillFields); return; }
 
         if (isLogin) {
             const userData = StorageManager.getUser(username);
             if (userData && userData.user && userData.user.password === password) {
                 StorageManager.persistSession(username);
                 dispatch({ type: 'LOGIN', username, data: userData });
-            } else { setError('Usuario no encontrado o contraseña incorrecta'); }
+            } else { setError(t.userNotFound); }
         } else {
-            if (StorageManager.getUser(username)) { setError('El usuario ya existe'); } else {
+            if (StorageManager.getUser(username)) { setError(t.userExists); } else {
                 const newUser = { ...defaultUser, username, password } as any;
                 const initialData = { user: newUser, mastery: {} };
                 StorageManager.saveUser(username, initialData);
@@ -55,14 +57,14 @@ const AuthScreen = () => {
                 </div>
                 <h2 className="text-3xl font-extrabold text-center text-gray-800 mb-2">GermanMaster Ultimate</h2>
                 <div className="flex bg-gray-100 p-1 rounded-xl mb-6">
-                    <button onClick={() => setIsLogin(true)} className={`flex-1 py-2 rounded-lg font-bold text-sm ${isLogin ? 'bg-white shadow text-indigo-600' : 'text-gray-500'}`}>Entrar</button>
-                    <button onClick={() => setIsLogin(false)} className={`flex-1 py-2 rounded-lg font-bold text-sm ${!isLogin ? 'bg-white shadow text-indigo-600' : 'text-gray-500'}`}>Registro</button>
+                    <button onClick={() => setIsLogin(true)} className={`flex-1 py-2 rounded-lg font-bold text-sm ${isLogin ? 'bg-white shadow text-indigo-600' : 'text-gray-500'}`}>{t.login}</button>
+                    <button onClick={() => setIsLogin(false)} className={`flex-1 py-2 rounded-lg font-bold text-sm ${!isLogin ? 'bg-white shadow text-indigo-600' : 'text-gray-500'}`}>{t.register}</button>
                 </div>
                 <form onSubmit={handleSubmit} className="space-y-4">
-                    <div className="relative"><User className="absolute left-3 top-3 text-gray-400" size={18} /><input type="text" value={username} onChange={(e) => setUsername(e.target.value)} className="w-full pl-10 pr-4 py-3 bg-gray-50 border rounded-xl outline-none focus:border-indigo-500 transition-colors" placeholder="Usuario" /></div>
-                    <div className="relative"><Lock className="absolute left-3 top-3 text-gray-400" size={18} /><input type="password" value={password} onChange={(e) => setPassword(e.target.value)} className="w-full pl-10 pr-4 py-3 bg-gray-50 border rounded-xl outline-none focus:border-indigo-500 transition-colors" placeholder="Contraseña" /></div>
+                    <div className="relative"><User className="absolute left-3 top-3 text-gray-400" size={18} /><input type="text" value={username} onChange={(e) => setUsername(e.target.value)} className="w-full pl-10 pr-4 py-3 bg-gray-50 border rounded-xl outline-none focus:border-indigo-500 transition-colors" placeholder={t.username} /></div>
+                    <div className="relative"><Lock className="absolute left-3 top-3 text-gray-400" size={18} /><input type="password" value={password} onChange={(e) => setPassword(e.target.value)} className="w-full pl-10 pr-4 py-3 bg-gray-50 border rounded-xl outline-none focus:border-indigo-500 transition-colors" placeholder={t.password} /></div>
                     {error && <div className="text-red-500 text-sm font-medium text-center">{error}</div>}
-                    <button type="submit" className="w-full bg-indigo-600 text-white font-bold py-3 rounded-xl shadow-lg mt-4 hover:bg-indigo-700 transition-colors">Comenzar</button>
+                    <button type="submit" className="w-full bg-indigo-600 text-white font-bold py-3 rounded-xl shadow-lg mt-4 hover:bg-indigo-700 transition-colors">{t.startBtn}</button>
                 </form>
             </div>
             <p className="fixed bottom-4 text-xs text-gray-400">GermanMaster Ultimate Edition - v2.3</p>

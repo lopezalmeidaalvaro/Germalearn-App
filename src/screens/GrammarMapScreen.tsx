@@ -2,12 +2,14 @@ import { useContext } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { GameContext } from '../context/GameContext';
 import { GRAMMAR_SYSTEMS } from '../data/constants';
+import { useTranslation } from '../i18n/translations';
 
 const GrammarMapScreen = () => {
     const context = useContext(GameContext);
     if (!context) return null;
     const { state, dispatch } = context;
     const isDark = state.user?.theme === 'dark';
+    const t = useTranslation();
 
     return (
         <div className="max-w-4xl mx-auto p-4 md:p-6 space-y-8 animate-in fade-in duration-500 pb-20">
@@ -15,7 +17,7 @@ const GrammarMapScreen = () => {
                 <button onClick={() => dispatch({ type: 'GO_TO_DASHBOARD' })} className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 mr-4">
                     <ArrowRight className="rotate-180" size={24} />
                 </button>
-                <h1 className="text-3xl font-extrabold">Mapa Gramatical</h1>
+                <h1 className="text-3xl font-extrabold">{t.grammarMapTitle}</h1>
             </div>
 
             <div className="space-y-8">

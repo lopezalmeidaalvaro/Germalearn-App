@@ -3,11 +3,13 @@ import { ArrowRight, Star, Lock, Heart } from 'lucide-react';
 import { GameContext } from '../context/GameContext';
 import { CHAPTERS, CHAPTER_PATH_NODES } from '../data/constants';
 import { GamificationLogic } from '../logic/gamification';
+import { useTranslation } from '../i18n/translations';
 
 const ChapterPathScreen = () => {
     const context = useContext(GameContext);
     if (!context) return null;
     const { state, dispatch } = context;
+    const t = useTranslation();
 
     const isDark = state.user?.theme === 'dark';
     const chapter = CHAPTERS.find(c => c.id === state.selectedChapterId);
@@ -19,7 +21,7 @@ const ChapterPathScreen = () => {
 
         // Heart Check
         if (state.user && state.user.hearts <= 0 && !state.isAdminMode && !level.isGym) {
-            alert("¡Te has quedado sin vidas! Practica en el Gimnasio para recuperar corazones o espera.");
+            alert(t.noHeartsAlert);
             return;
         }
 
@@ -35,7 +37,7 @@ const ChapterPathScreen = () => {
                     </button>
                     <div>
                         <h1 className="text-2xl font-extrabold">{chapter.title}</h1>
-                        <p className="text-sm opacity-60">Ruta de Aprendizaje</p>
+                        <p className="text-sm opacity-60">{t.learningPath}</p>
                     </div>
                 </div>
                 <div className={`flex items-center gap-1 font-bold px-3 py-1 rounded-full transition-colors ${state.isAdminMode ? 'text-yellow-600 bg-yellow-100 dark:bg-yellow-900/20 border border-yellow-300 dark:border-yellow-700' : 'text-red-500 bg-red-100 dark:bg-red-900/20'}`}>
@@ -70,7 +72,7 @@ const ChapterPathScreen = () => {
                             </button>
                             <div className={`absolute left-[52%] md:left-[55%] top-6 bg-white dark:bg-gray-800 px-3 py-1 rounded-xl shadow-md border dark:border-gray-700 text-xs font-bold whitespace-nowrap ${isLocked ? 'opacity-50' : ''} ${isDark ? 'text-white' : 'text-gray-700'}`}>
                                 {level.title}
-                                {isLocked && <span className="block text-[10px] text-red-500">Nivel {GamificationLogic.getRequiredLevel(index)}</span>}
+                                {isLocked && <span className="block text-[10px] text-red-500">{t.levelRequired} {GamificationLogic.getRequiredLevel(index)}</span>}
                                 <div className="absolute left-[-6px] top-1/2 -translate-y-1/2 w-3 h-3 bg-white dark:bg-gray-800 border-l border-b dark:border-gray-700 transform rotate-45"></div>
                             </div>
                         </div>

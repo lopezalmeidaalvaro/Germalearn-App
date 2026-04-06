@@ -2,6 +2,7 @@ import { useContext } from 'react';
 import { Home, Map, Dumbbell, User, LogOut, Heart, Zap, Flame } from 'lucide-react';
 import { GameContext } from '../../context/GameContext';
 import { GamificationLogic } from '../../logic/gamification';
+import { useTranslation } from '../../i18n/translations';
 
 const Sidebar = () => {
     const context = useContext(GameContext);
@@ -9,11 +10,12 @@ const Sidebar = () => {
     const { state, dispatch } = context;
 
     // isDark removed as it was unused
+    const t = useTranslation();
 
     const navItems = [
-        { id: 'dashboard', icon: Home, label: 'Inicio', action: 'GO_TO_DASHBOARD' },
-        { id: 'grammar_map', icon: Map, label: 'Mapa Gramatical', action: 'GO_TO_GRAMMAR_MAP' },
-        { id: 'settings', icon: User, label: 'Perfil y Ajustes', action: 'OPEN_SETTINGS' },
+        { id: 'dashboard', icon: Home, label: t.home, action: 'GO_TO_DASHBOARD' },
+        { id: 'grammar_map', icon: Map, label: t.mapNav, action: 'GO_TO_GRAMMAR_MAP' },
+        { id: 'settings', icon: User, label: t.profileAndSettings, action: 'OPEN_SETTINGS' },
     ];
 
     return (
@@ -65,7 +67,7 @@ const Sidebar = () => {
                     </div>
                     <div className="overflow-hidden">
                         <p className="font-bold text-sm truncate dark:text-white">{state.user?.username}</p>
-                        <p className="text-xs text-gray-500">Nivel {GamificationLogic.calculateLevel(state.user?.xp || 0)}</p>
+                        <p className="text-xs text-gray-500">{t.level} {GamificationLogic.calculateLevel(state.user?.xp || 0)}</p>
                     </div>
                 </div>
                 <div className="flex justify-between items-center text-sm">
@@ -86,7 +88,7 @@ const Sidebar = () => {
                     onClick={() => dispatch({ type: 'LOGOUT' })}
                     className="flex items-center gap-2 text-sm text-gray-400 hover:text-red-500 px-4 transition-colors"
                 >
-                    <LogOut size={16} /> <span>Cerrar Sesión</span>
+                    <LogOut size={16} /> <span>{t.logOut}</span>
                 </button>
             </div>
         </aside>

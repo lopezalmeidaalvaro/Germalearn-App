@@ -1,6 +1,7 @@
 import React from 'react';
 import { Trophy, Star } from 'lucide-react';
 import Button from './ui/Button';
+import { useTranslation } from '../i18n/translations';
 
 interface LevelUpModalProps {
     level: number;
@@ -9,8 +10,7 @@ interface LevelUpModalProps {
 }
 
 const LevelUpModal: React.FC<LevelUpModalProps> = ({ level, rank, onClose }) => {
-
-    // Auto-close sound? Or just animation
+    const t = useTranslation();
 
     return (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/70 backdrop-blur-md animate-in fade-in duration-300">
@@ -27,18 +27,18 @@ const LevelUpModal: React.FC<LevelUpModalProps> = ({ level, rank, onClose }) => 
                     </div>
 
                     <h2 className="text-3xl font-black uppercase italic tracking-wider mb-2 text-transparent bg-clip-text bg-gradient-to-b from-yellow-300 to-yellow-600 drop-shadow-sm">
-                        ¡Nivel Subido!
+                        {t.levelUp}
                     </h2>
 
                     <div className="bg-white/10 p-4 rounded-xl backdrop-blur-sm border border-white/20 mb-6">
-                        <p className="text-sm opacity-80 uppercase tracking-widest mb-1">Nuevo Nivel</p>
+                        <p className="text-sm opacity-80 uppercase tracking-widest mb-1">{t.newLevel}</p>
                         <p className="text-6xl font-black text-white drop-shadow-lg">{level}</p>
                         <div className="w-full h-1 bg-white/20 my-2 rounded-full" />
                         <p className="text-lg text-yellow-300 font-bold">{rank}</p>
                     </div>
 
                     <Button onClick={onClose} className="w-full bg-yellow-500 hover:bg-yellow-400 text-indigo-900 font-black text-lg py-4 rounded-xl shadow-lg transform transition hover:scale-105">
-                        ¡GENIAL!
+                        {t.awesome}
                     </Button>
                 </div>
             </div>

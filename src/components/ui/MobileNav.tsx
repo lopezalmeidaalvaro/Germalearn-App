@@ -1,17 +1,19 @@
 import { useContext } from 'react';
 import { Home, Map, Dumbbell, User } from 'lucide-react';
 import { GameContext } from '../../context/GameContext';
+import { useTranslation } from '../../i18n/translations';
 
 const MobileNav = () => {
     const context = useContext(GameContext);
     if (!context) return null;
     const { state, dispatch } = context;
+    const t = useTranslation();
 
     const navItems = [
-        { id: 'dashboard', icon: Home, label: 'Inicio', action: 'GO_TO_DASHBOARD' },
-        { id: 'grammar_map', icon: Map, label: 'Mapa', action: 'GO_TO_GRAMMAR_MAP' },
-        { id: 'start_gym', icon: Dumbbell, label: 'Gym', action: 'START_SESSION', isGym: true }, // Special case handling needed
-        { id: 'settings', icon: User, label: 'Perfil', action: 'OPEN_SETTINGS' },
+        { id: 'dashboard', icon: Home, label: t.home, action: 'GO_TO_DASHBOARD' },
+        { id: 'grammar_map', icon: Map, label: t.mapNav, action: 'GO_TO_GRAMMAR_MAP' },
+        { id: 'start_gym', icon: Dumbbell, label: t.gymNav, action: 'START_SESSION', isGym: true }, // Special case handling needed
+        { id: 'settings', icon: User, label: t.profileNav, action: 'OPEN_SETTINGS' },
     ];
 
     const isActive = (itemId: string) => {
