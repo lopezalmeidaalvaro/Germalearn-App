@@ -98,7 +98,7 @@ const DashboardScreen = () => {
                                 className={`p-6 rounded-2xl border-2 cursor-pointer transition-transform hover:scale-105 active:scale-95 ${isDark ? 'bg-gray-800 border-gray-700 hover:border-indigo-500 text-white' : 'bg-white border-gray-200 hover:border-indigo-400'}`}
                             >
                                 <div className="flex items-center mb-3 text-indigo-500"><IconComponent size={32} /></div>
-                                <h3 className="text-xl font-bold mb-1">{chap.title}</h3>
+                                <h3 className="text-xl font-bold mb-1">{typeof chap.title === 'object' ? chap.title[baseLang] : chap.title}</h3>
                                 <p className="text-xs opacity-60">{typeof chap.desc === 'object' ? chap.desc[baseLang] : chap.desc}</p>
                             </div>
                         )

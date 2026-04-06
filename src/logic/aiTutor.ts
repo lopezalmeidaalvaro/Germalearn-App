@@ -55,8 +55,8 @@ export class AITutorService {
 
         // 4. Generación de Prompt
         const langInstruction = baseLanguage === 'en'
-            ? 'The user\'s native language is English. Provide ALL feedback, explanations, and corrections in English.'
-            : 'El idioma nativo del usuario es Español. Proporciona TODOS los comentarios, explicaciones y correcciones en Español.';
+            ? 'The user\'s native language is English. Provide ALL feedback, explanations, and corrections in English. CRITICAL: The user interface and the reference translations MUST be exactly in this language: en (English). For example, if the language is \'en\', do not give me a Spanish sentence to translate into German; give me an English sentence to translate into German.'
+            : 'El idioma nativo del usuario es Español. Proporciona TODOS los comentarios, explicaciones y correcciones en Español. CRITICAL: The user interface and the reference translations MUST be exactly in this language: es (Spanish).';
 
         const prompt = `
         ${langInstruction}
@@ -114,8 +114,8 @@ export class AITutorService {
         if (!finalKey) throw new Error("⚠️ No hay API Key. Configúrala en Ajustes.");
 
         const langInstruction = baseLanguage === 'en'
-            ? 'The user\'s native language is English. Provide ALL feedback, corrections and explanations in English.'
-            : 'El idioma nativo del usuario es Español. Proporciona TODOS los comentarios y correcciones en Español.';
+            ? 'The user\'s native language is English. Provide ALL feedback, corrections and explanations in English. CRITICAL: The user interface and the reference translations MUST be exactly in this language: en (English).'
+            : 'El idioma nativo del usuario es Español. Proporciona TODOS los comentarios y correcciones en Español. CRITICAL: The user interface and the reference translations MUST be exactly in this language: es (Spanish).';
 
         const prompt = `
         ${langInstruction}

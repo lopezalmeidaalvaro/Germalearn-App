@@ -37,7 +37,7 @@ const ChapterPathScreen = () => {
                         <ArrowRight className="rotate-180" size={24} />
                     </button>
                     <div>
-                        <h1 className="text-2xl font-extrabold">{chapter.title}</h1>
+                        <h1 className="text-2xl font-extrabold">{typeof chapter.title === 'object' ? chapter.title[baseLang] : chapter.title}</h1>
                         <p className="text-sm opacity-60">{t.learningPath}</p>
                     </div>
                 </div>

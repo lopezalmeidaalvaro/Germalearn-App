@@ -42,7 +42,7 @@ const GrammarMapScreen = () => {
                                             <SysIcon size={24} />
                                         </div>
                                         <div>
-                                            <h3 className="font-bold text-lg">{sys.name}</h3>
+                                            <h3 className="font-bold text-lg">{typeof sys.name === 'object' ? sys.name[baseLang] : sys.name}</h3>
                                             <p className="text-sm opacity-60 leading-tight">{typeof sys.desc === 'object' ? sys.desc[baseLang] : sys.desc}</p>
                                         </div>
                                     </div>
