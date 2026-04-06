@@ -151,7 +151,11 @@ function appReducer(state: AppState, action: Action): AppState {
             if (action.grammarId) { title = 'Entrenamiento Gramatical'; sType = 'GYM'; }
             if (action.isGym) { title = 'Gimnasio'; sType = 'GYM'; }
             if (action.levelNode) {
-                title = action.levelNode.title;
+                // Comprobamos si es un string normal o un objeto bilingüe
+                title = typeof action.levelNode.title === 'string'
+                    ? action.levelNode.title
+                    : action.levelNode.title.es; // OJO: Si tu BilingualText usa 'en' o 'text' por defecto, cámbialo aquí.
+
                 if (action.levelNode.type === 'boss') sType = 'BOSS';
                 if (action.levelNode.isGym) sType = 'GYM';
             }
