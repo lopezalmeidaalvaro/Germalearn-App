@@ -145,11 +145,11 @@ function appReducer(state: AppState, action: Action): AppState {
             if (state.user && state.user.hearts <= 0 && !action.isGym && !action.levelNode?.isGym && !state.isAdminMode) return state;
             const queue = SessionGenerator.generate(B1_CHUNKS, state.mastery, action.grammarId, action.chapterId, action.isGym, undefined, action.levelNode);
             if (queue.length === 0) return state;
-            let title = 'Mix Diario';
+            let title = 'sessionTitleMix';
             let sType: 'LESSON' | 'BOSS' | 'GYM' = 'LESSON';
 
-            if (action.grammarId) { title = 'Entrenamiento Gramatical'; sType = 'GYM'; }
-            if (action.isGym) { title = 'Gimnasio'; sType = 'GYM'; }
+            if (action.grammarId) { title = 'sessionTitleGrammar'; sType = 'GYM'; }
+            if (action.isGym) { title = 'sessionTitleGym'; sType = 'GYM'; }
             if (action.levelNode) {
                 // Comprobamos si es un string normal o un objeto bilingüe
                 title = typeof action.levelNode.title === 'string'
@@ -182,7 +182,7 @@ function appReducer(state: AppState, action: Action): AppState {
                 screen: 'session',
                 session: {
                     queue: srsQueue, currentIndex: 0, correctCount: 0, currentStreak: 0, mistakes: [],
-                    isGymMode: true, isReviewMode: true, isCorrectionMode: false, activeTitle: 'Repaso Inteligente',
+                    isGymMode: true, isReviewMode: true, isCorrectionMode: false, activeTitle: 'sessionTitleReview',
                     sessionType: 'GYM'
                 }
             };
@@ -205,7 +205,7 @@ function appReducer(state: AppState, action: Action): AppState {
                 screen: 'session',
                 session: {
                     queue: correctionQueue, currentIndex: 0, correctCount: 0, currentStreak: 0, mistakes: [],
-                    isGymMode: true, isReviewMode: false, isCorrectionMode: true, activeTitle: 'Correcciones',
+                    isGymMode: true, isReviewMode: false, isCorrectionMode: true, activeTitle: 'sessionTitleCorrections',
                     sessionType: 'GYM'
                 }
             };

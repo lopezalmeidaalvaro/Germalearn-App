@@ -4,9 +4,11 @@ import type { RoleplayScenario } from '../../types';
 import { useAudio } from '../../hooks/useAudio';
 import { AITutorService } from '../../logic/aiTutor';
 import { Lock } from 'lucide-react';
+import { useTranslation } from '../../i18n/translations';
 
 const ChatView = ({ scenario, onFinish }: { scenario: RoleplayScenario, onFinish: () => void }) => {
     const { speak, playSound } = useAudio();
+    const t = useTranslation();
     const [history, setHistory] = useState<any[]>([]);
     const [stepIndex, setStepIndex] = useState(0);
     const [isTyping, setIsTyping] = useState(false);
@@ -19,6 +21,13 @@ const ChatView = ({ scenario, onFinish }: { scenario: RoleplayScenario, onFinish
     const [summaryText, setSummaryText] = useState('');
     const [summaryFeedback, setSummaryFeedback] = useState<{ isCorrect: boolean, msg: string } | null>(null);
     const [isEvaluatingSummary, setIsEvaluatingSummary] = useState(false);
+
+    // Cancel speech when component unmounts (e.g. when closing the activity)
+    useEffect(() => {
+        return () => {
+            window.speechSynthesis?.cancel();
+        };
+    }, []);
 
     // STRICT AI SYSTEM PROMPT FOR JSON MODE
     const JSON_SYSTEM_INSTRUCTIONS = `
@@ -78,7 +87,7 @@ const ChatView = ({ scenario, onFinish }: { scenario: RoleplayScenario, onFinish
 
         } catch (error) {
             console.error("Chat Error:", error);
-            setToast({ msg: "Error de conexión", type: 'error' });
+            setToast({ msg: t.connectionError, type: 'error' });
             // Fallback to keep flow going
             setCurrentOptions(["Weiter"]);
         } finally {
@@ -143,7 +152,7 @@ const ChatView = ({ scenario, onFinish }: { scenario: RoleplayScenario, onFinish
 
     const handleFinishSummary = async () => {
         if (summaryText.split(' ').length < 5) {
-            setToast({ msg: "Escribe al menos 5 palabras.", type: 'error' });
+            setToast({ msg: t.writeSummaryMin, type: 'error' });
             return;
         }
 
@@ -164,7 +173,7 @@ const ChatView = ({ scenario, onFinish }: { scenario: RoleplayScenario, onFinish
                 playSound('error');
             }
         } catch (e) {
-            setToast({ msg: "Error al evaluar.", type: 'error' });
+            setToast({ msg: t.evaluationError, type: 'error' });
         } finally {
             setIsEvaluatingSummary(false);
         }
@@ -182,7 +191,7 @@ const ChatView = ({ scenario, onFinish }: { scenario: RoleplayScenario, onFinish
                         {scenario.aiPersona || scenario.partnerName}
                         {isDynamic && <span className="ml-2 text-[10px] bg-white/20 px-1 rounded">AI</span>}
                     </h3>
-                    <p className="text-xs opacity-80 flex items-center gap-1">en línea</p>
+                    <p className="text-xs opacity-80 flex items-center gap-1">{t.onlineStatus}</p>
                 </div>
                 <div className="flex gap-4 pr-2">
                     <Video size={20} className="opacity-80" />
@@ -203,7 +212,7 @@ const ChatView = ({ scenario, onFinish }: { scenario: RoleplayScenario, onFinish
 
                 <div className="flex justify-center mb-6">
                     <div className="bg-[#FFD279] dark:bg-[#1f2c34] text-[#5e5e5e] dark:text-[#ffcc00] text-[10px] px-3 py-1 rounded-lg shadow-sm text-center max-w-[80%]">
-                        <Lock size={8} className="inline mr-1 mb-[1px]" /> Los mensajes están cifrados de extremo a extremo.
+                        <Lock size={8} className="inline mr-1 mb-[1px]" /> {t.encryptedMessages}
                     </div>
                 </div>
 
@@ -239,7 +248,7 @@ const ChatView = ({ scenario, onFinish }: { scenario: RoleplayScenario, onFinish
                 {/* SUMMARY FEEDBACK */}
                 {summaryFeedback && (
                     <div className={`mx-4 p-3 rounded-lg text-sm border ${summaryFeedback.isCorrect ? 'bg-green-100 text-green-800 border-green-200' : 'bg-red-100 text-red-800 border-red-200'}`}>
-                        <strong>{summaryFeedback.isCorrect ? "✅ " : "⚠️ "}Evaluación:</strong> {summaryFeedback.msg}
+                        <strong>{summaryFeedback.isCorrect ? "✅ " : "⚠️ "}{t.evaluationLabel}</strong> {summaryFeedback.msg}
                     </div>
                 )}
 
@@ -287,12 +296,12 @@ const ChatView = ({ scenario, onFinish }: { scenario: RoleplayScenario, onFinish
                     <div className="flex flex-col gap-2 px-2 animate-in zoom-in-95 duration-300">
                         <div className="flex items-center gap-2 mb-1">
                             <Sparkles size={16} className="text-yellow-500" />
-                            <span className="text-xs font-bold text-gray-500 uppercase">Zusammenfassung (Resumen)</span>
+                            <span className="text-xs font-bold text-gray-500 uppercase">{t.summarySection}</span>
                         </div>
                         <textarea
                             value={summaryText}
                             onChange={e => setSummaryText(e.target.value)}
-                            placeholder="Escribe un breve resumen de la conversación (15 palabras)..."
+                            placeholder={t.summaryPlaceholder}
                             className="w-full bg-white dark:bg-[#2a3942] rounded-lg p-3 text-sm text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-[#008069] resize-none h-20"
                             disabled={isEvaluatingSummary || (summaryFeedback?.isCorrect === true)}
                         />
@@ -301,14 +310,14 @@ const ChatView = ({ scenario, onFinish }: { scenario: RoleplayScenario, onFinish
                             disabled={isEvaluatingSummary || !summaryText.trim() || (summaryFeedback?.isCorrect === true)}
                             className="bg-[#008069] text-white p-2 rounded-lg font-bold text-sm hover:bg-[#006e5a] transition-colors disabled:opacity-50"
                         >
-                            {isEvaluatingSummary ? "Evaluando..." : "Finalizar & Evaluar"}
+                            {isEvaluatingSummary ? t.evaluating : t.finishAndEvaluate}
                         </button>
                     </div>
                 )}
 
                 {/* PLACEHOLDER IF LOADING OR WAITING - NO INPUT FIELD HERE */}
                 {isTyping && currentOptions.length === 0 && (
-                    <div className="text-center text-xs text-gray-400 py-2">Generando opciones...</div>
+                    <div className="text-center text-xs text-gray-400 py-2">{t.generatingOptions}</div>
                 )}
             </div>
         </div>

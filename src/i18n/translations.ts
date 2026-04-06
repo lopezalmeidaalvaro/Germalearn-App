@@ -124,6 +124,22 @@ export interface Translations {
     tabHoeren: string;
     checkAnswers: string;
     aiConnectionError: string;
+    // ChatView
+    onlineStatus: string;
+    encryptedMessages: string;
+    evaluationLabel: string;
+    summarySection: string;
+    summaryPlaceholder: string;
+    generatingOptions: string;
+    connectionError: string;
+    writeSummaryMin: string;
+    evaluationError: string;
+    // Session titles
+    sessionTitleGrammar: string;
+    sessionTitleGym: string;
+    sessionTitleReview: string;
+    sessionTitleCorrections: string;
+    sessionTitleMix: string;
 }
 
 export const translations: Record<Lang, Translations> = {
@@ -228,6 +244,20 @@ export const translations: Record<Lang, Translations> = {
         tabHoeren: '🎧 Hören (Escuchar)',
         checkAnswers: 'Comprobar',
         aiConnectionError: 'Error de conexión con IA',
+        onlineStatus: 'en línea',
+        encryptedMessages: 'Los mensajes están cifrados de extremo a extremo.',
+        evaluationLabel: 'Evaluación:',
+        summarySection: 'Zusammenfassung (Resumen)',
+        summaryPlaceholder: 'Escribe un breve resumen de la conversación (15 palabras)...',
+        generatingOptions: 'Generando opciones...',
+        connectionError: 'Error de conexión',
+        writeSummaryMin: 'Escribe al menos 5 palabras.',
+        evaluationError: 'Error al evaluar.',
+        sessionTitleGrammar: 'Entrenamiento Gramatical',
+        sessionTitleGym: 'Gimnasio',
+        sessionTitleReview: 'Repaso Inteligente',
+        sessionTitleCorrections: 'Correcciones',
+        sessionTitleMix: 'Mix Diario',
     },
     en: {
         check: 'Check',
@@ -330,6 +360,20 @@ export const translations: Record<Lang, Translations> = {
         tabHoeren: '🎧 Hören (Listen)',
         checkAnswers: 'Check',
         aiConnectionError: 'AI connection error',
+        onlineStatus: 'online',
+        encryptedMessages: 'Messages are end-to-end encrypted.',
+        evaluationLabel: 'Evaluation:',
+        summarySection: 'Zusammenfassung (Summary)',
+        summaryPlaceholder: 'Write a brief summary of the conversation (15 words)...',
+        generatingOptions: 'Generating options...',
+        connectionError: 'Connection error',
+        writeSummaryMin: 'Write at least 5 words.',
+        evaluationError: 'Error while evaluating.',
+        sessionTitleGrammar: 'Grammar Training',
+        sessionTitleGym: 'Gym',
+        sessionTitleReview: 'Smart Review',
+        sessionTitleCorrections: 'Corrections',
+        sessionTitleMix: 'Daily Mix',
     },
 };
 

@@ -34,6 +34,13 @@ const GameNavigator = () => {
 
   const showLayout = !['auth', 'session', 'summary'].includes(state.screen);
 
+  // Stop audio when session screen is left
+  useEffect(() => {
+    if (state.screen !== 'session') {
+      window.speechSynthesis?.cancel();
+    }
+  }, [state.screen]);
+
   return (
     <div className={`min-h-screen font-sans transition-colors duration-300 ${isDark ? 'bg-gray-950 text-white' : 'bg-white text-gray-900'
       }`}>
@@ -57,13 +64,18 @@ const GameNavigator = () => {
         <div className={`container mx-auto p-4 max-w-xl min-h-screen ${isDark ? 'bg-gray-950' : 'bg-white'}`}>
           <div className="flex justify-between items-center mb-6">
             <button
-              onClick={() => dispatch({ type: 'EXIT_SESSION' })}
+              onClick={() => {
+                window.speechSynthesis?.cancel();
+                dispatch({ type: 'EXIT_SESSION' });
+              }}
               className="p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-colors"
             >
               <X className={isDark ? 'text-gray-400' : 'text-gray-600'} />
             </button>
             <span className="font-bold text-indigo-500 text-xs uppercase tracking-wider bg-indigo-50 dark:bg-indigo-900/30 px-3 py-1 rounded-full">
-              {state.session.isReviewMode ? t.reviewMode : state.session.activeTitle}
+              {state.session.isReviewMode
+                ? t.reviewMode
+                : (t as any)[state.session.activeTitle ?? ''] ?? state.session.activeTitle}
             </span>
             <div className="w-6" />
           </div>
