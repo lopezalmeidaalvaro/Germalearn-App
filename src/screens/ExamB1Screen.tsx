@@ -1,6 +1,7 @@
 import { useState, useContext, useRef, useEffect } from 'react';
 import { GameContext } from '../context/GameContext';
 import { AITutorService } from '../logic/aiTutor';
+import { useTranslation } from '../i18n/translations';
 
 interface FeedbackResult {
     status: 'correct' | 'warning' | 'error';
@@ -10,6 +11,7 @@ interface FeedbackResult {
 // --- SHARED COMPONENTS ---
 
 const FeedbackOverlay = ({ feedback, onClose }: { feedback: FeedbackResult | null, onClose: () => void }) => {
+    const t = useTranslation();
     if (!feedback) return null;
     const isCorrect = feedback.status === 'correct';
     const isWarning = feedback.status === 'warning';
@@ -38,7 +40,7 @@ const FeedbackOverlay = ({ feedback, onClose }: { feedback: FeedbackResult | nul
                 </div>
 
                 <button onClick={onClose} className={`w-full py-3 rounded-xl font-bold text-white shadow-lg ${btnColor} hover:opacity-90 active:scale-95 transition-all`}>
-                    Entendido
+                    {t.understood}
                 </button>
             </div>
         </div>
@@ -48,6 +50,7 @@ const FeedbackOverlay = ({ feedback, onClose }: { feedback: FeedbackResult | nul
 // --- WRITING SECTION COMPONENTS ---
 
 const WritingTask = ({ title, instruction, solution, onCorrect }: { title: string, instruction: string, solution: string, id?: string, onCorrect: (text: string, task: string) => Promise<void> }) => {
+    const t = useTranslation();
     const [showSolution, setShowSolution] = useState(false);
     const [text, setText] = useState('');
     const [isLoading, setIsLoading] = useState(false);
@@ -67,20 +70,20 @@ const WritingTask = ({ title, instruction, solution, onCorrect }: { title: strin
             <textarea
                 value={text}
                 onChange={(e) => setText(e.target.value)}
-                placeholder="Escribe tu respuesta aquí..."
+                placeholder={t.writeAnswerHere}
                 className="w-full h-32 p-4 rounded-xl bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 focus:ring-2 focus:ring-indigo-500 outline-none resize-none transition-all"
                 disabled={isLoading}
             />
 
             <div className="flex justify-between items-center pt-2">
-                <span className="text-xs text-gray-400">{text.split(/\s+/).filter(w => w.length > 0).length} palabras</span>
+                <span className="text-xs text-gray-400">{text.split(/\s+/).filter(w => w.length > 0).length} {t.wordCount}</span>
 
                 <div className="flex gap-3">
                     <button
                         onClick={() => setShowSolution(!showSolution)}
                         className="flex items-center gap-2 text-sm font-bold text-indigo-500 hover:text-indigo-600 transition-colors"
                     >
-                        {showSolution ? <>❌ Ocultar</> : <>📖 Ver Solución</>}
+                        {showSolution ? <>{t.hideSolution}</> : <>{t.viewSolution}</>}
                     </button>
 
                     <button
@@ -89,14 +92,14 @@ const WritingTask = ({ title, instruction, solution, onCorrect }: { title: strin
                         className="flex items-center gap-2 text-sm font-bold text-white bg-indigo-600 px-3 py-2 rounded-lg hover:bg-indigo-700 disabled:opacity-50 transition-all shadow-md"
                     >
                         {isLoading ? <span className="animate-spin">↻</span> : <span>✨</span>}
-                        {isLoading ? '...' : 'Corregir con IA'}
+                        {isLoading ? t.correcting : t.correctWithAI}
                     </button>
                 </div>
             </div>
 
             {showSolution && (
                 <div className="bg-green-50 dark:bg-green-900/20 p-4 rounded-xl border border-green-100 dark:border-green-800 animate-in fade-in slide-in-from-top-2">
-                    <h4 className="text-xs font-bold text-green-600 dark:text-green-400 mb-2 uppercase tracking-wide">Musterlösung (Solución Modelo)</h4>
+                    <h4 className="text-xs font-bold text-green-600 dark:text-green-400 mb-2 uppercase tracking-wide">{t.sampleSolution}</h4>
                     <p className="text-sm text-gray-700 dark:text-gray-200 font-serif leading-relaxed whitespace-pre-wrap">
                         {solution}
                     </p>
@@ -107,15 +110,14 @@ const WritingTask = ({ title, instruction, solution, onCorrect }: { title: strin
 };
 
 const WritingSection = ({ onCorrect }: { onCorrect: (text: string, instruction: string) => Promise<void> }) => {
+    const t = useTranslation();
     return (
         <div className="space-y-12 animate-in fade-in duration-500">
             <div className="bg-yellow-50 dark:bg-yellow-900/10 border border-yellow-200 dark:border-yellow-800 p-4 rounded-2xl flex items-start gap-3">
                 <span className="text-yellow-600 mt-1 text-xl">📝</span>
                 <div>
-                    <h3 className="font-bold text-yellow-800 dark:text-yellow-500">Instrucciones (Schreiben)</h3>
-                    <p className="text-sm text-yellow-700 dark:text-yellow-300 opacity-90">
-                        Completa las 3 tareas. Usa "Corregir con IA" para recibir feedback instantáneo.
-                    </p>
+                    <h3 className="font-bold text-yellow-800 dark:text-yellow-500">{t.instructionsSchreiben}</h3>
+                    <p className="text-sm text-yellow-700 dark:text-yellow-300 opacity-90">{t.instructionsSchreibenDesc}</p>
                 </div>
             </div>
 
@@ -173,6 +175,7 @@ Was denkt ihr?`}
 
 const GapFillExercise = () => {
     // 10 Gaps
+    const t = useTranslation();
     const gaps = [
         { id: 1, options: ["Ihrer", "Seiner", "Dessen"], correct: "Ihrer" },
         { id: 2, options: ["der", "die", "das"], correct: "die" },
@@ -261,7 +264,7 @@ const GapFillExercise = () => {
 
             <div className="flex justify-end pt-2">
                 <button onClick={checkAnswers} className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-bold shadow transition-transform active:scale-95">
-                    Comprobar
+                    {t.checkAnswers}
                 </button>
             </div>
         </div>
@@ -269,6 +272,7 @@ const GapFillExercise = () => {
 };
 
 const QuizExercise = () => {
+    const t = useTranslation();
     const questions = [
         {
             id: 1, q: "El vidrio (Glas)", options: [
@@ -368,7 +372,7 @@ const QuizExercise = () => {
 
             <div className="flex justify-end pt-4">
                 <button onClick={checkAnswers} className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-bold shadow transition-transform active:scale-95">
-                    Comprobar
+                    {t.checkAnswers}
                 </button>
             </div>
         </div>
@@ -376,15 +380,14 @@ const QuizExercise = () => {
 };
 
 const ReadingSection = () => {
+    const t = useTranslation();
     return (
         <div className="space-y-12 animate-in fade-in duration-500">
             <div className="bg-blue-50 dark:bg-blue-900/10 border border-blue-200 dark:border-blue-800 p-4 rounded-2xl flex items-start gap-3">
                 <span className="text-blue-600 mt-1 text-xl">📖</span>
                 <div>
-                    <h3 className="font-bold text-blue-800 dark:text-blue-500">Instrucciones (Lesen)</h3>
-                    <p className="text-sm text-blue-700 dark:text-blue-300 opacity-90">
-                        Lee los textos y completa los ejercicios. Pulsa "Comprobar" para validar tus respuestas.
-                    </p>
+                    <h3 className="font-bold text-blue-800 dark:text-blue-500">{t.instructionsLesen}</h3>
+                    <p className="text-sm text-blue-700 dark:text-blue-300 opacity-90">{t.instructionsLesenDesc}</p>
                 </div>
             </div>
 
@@ -442,6 +445,7 @@ const ListeningExercise = ({ title, audioSrc, children }: { title: string, audio
 };
 
 const DialogosExercise = () => {
+    const t = useTranslation();
     const questions = [
         { id: 1, text: "Finja y Birger son vecinos.", correct: "true" },
         { id: 2, text: "La Sra. Steiger trabaja en el Café.", correct: "false" },
@@ -479,7 +483,7 @@ const DialogosExercise = () => {
                     );
                 })}
                 <div className="flex justify-end">
-                    <button onClick={checkAnswers} className="bg-indigo-600 text-white px-4 py-2 rounded-lg font-bold shadow-md hover:bg-indigo-700 transition">Comprobar</button>
+                    <button onClick={checkAnswers} className="bg-indigo-600 text-white px-4 py-2 rounded-lg font-bold shadow-md hover:bg-indigo-700 transition">{t.checkAnswers}</button>
                 </div>
             </div>
         </ListeningExercise>
@@ -487,6 +491,7 @@ const DialogosExercise = () => {
 };
 
 const WiesbadenExercise = () => {
+    const t = useTranslation();
     const questions = [
         { id: 1, q: "¿Turistas romanos?", options: ["No cambiaron mucho", "Nuevos visitantes", "No había turistas"], correct: 0 },
         { id: 2, q: "¿Por qué visitaban la ciudad?", options: ["Por el casino", "Por salud", "Por negocios"], correct: 1 },
@@ -525,7 +530,7 @@ const WiesbadenExercise = () => {
                     </div>
                 ))}
                 <div className="flex justify-end">
-                    <button onClick={checkAnswers} className="bg-indigo-600 text-white px-4 py-2 rounded-lg font-bold shadow-md hover:bg-indigo-700 transition">Comprobar</button>
+                    <button onClick={checkAnswers} className="bg-indigo-600 text-white px-4 py-2 rounded-lg font-bold shadow-md hover:bg-indigo-700 transition">{t.checkAnswers}</button>
                 </div>
             </div>
         </ListeningExercise>
@@ -533,6 +538,7 @@ const WiesbadenExercise = () => {
 };
 
 const ModaExercise = () => {
+    const t = useTranslation();
     const statements = [
         { id: 1, text: "La moda bio es demasiado cara.", correct: 1 },
         { id: 2, text: "La moda no debe ser dañina.", correct: 2 },
@@ -570,7 +576,7 @@ const ModaExercise = () => {
                     </div>
                 ))}
                 <div className="flex justify-end pt-2">
-                    <button onClick={() => setValidated(true)} className="bg-indigo-600 text-white px-4 py-2 rounded-lg font-bold shadow-md hover:bg-indigo-700 transition">Comprobar</button>
+                    <button onClick={() => setValidated(true)} className="bg-indigo-600 text-white px-4 py-2 rounded-lg font-bold shadow-md hover:bg-indigo-700 transition">{t.checkAnswers}</button>
                 </div>
             </div>
         </ListeningExercise>
@@ -616,15 +622,14 @@ const OpinionExercise = () => {
 }
 
 const ListeningSection = () => {
+    const t = useTranslation();
     return (
         <div className="space-y-12 animate-in fade-in duration-500">
             <div className="bg-purple-50 dark:bg-purple-900/10 border border-purple-200 dark:border-purple-800 p-4 rounded-2xl flex items-start gap-3">
                 <span className="text-purple-600 mt-1 text-xl">🎧</span>
                 <div>
-                    <h3 className="font-bold text-purple-800 dark:text-purple-500">Instrucciones (Hören)</h3>
-                    <p className="text-sm text-purple-700 dark:text-purple-300 opacity-90">
-                        Escucha los audios y responde a las preguntas.
-                    </p>
+                    <h3 className="font-bold text-purple-800 dark:text-purple-500">{t.instructionsHoeren}</h3>
+                    <p className="text-sm text-purple-700 dark:text-purple-300 opacity-90">{t.instructionsHoerenDesc}</p>
                 </div>
             </div>
 
@@ -642,6 +647,8 @@ const ExamB1Screen = () => {
     const context = useContext(GameContext);
     if (!context) return null;
     const { dispatch } = context;
+    const t = useTranslation();
+
 
     const [currentSection, setCurrentSection] = useState<'schreiben' | 'lesen' | 'hoeren'>('schreiben');
     const [feedback, setFeedback] = useState<FeedbackResult | null>(null);
@@ -656,7 +663,7 @@ const ExamB1Screen = () => {
         } catch (error: any) {
             setFeedback({
                 status: 'error',
-                message: error.message || "Error de conexión con IA"
+                message: error.message || t.aiConnectionError
             });
         }
     };
@@ -674,7 +681,7 @@ const ExamB1Screen = () => {
                     </button>
                     <div>
                         <h1 className="text-3xl font-black text-gray-900 dark:text-white">Examen B1.1 <span className="text-yellow-500">Simulacro</span></h1>
-                        <p className="text-gray-500 dark:text-gray-400">Evaluación Completa</p>
+                        <p className="text-gray-500 dark:text-gray-400">{t.examSubtitle}</p>
                     </div>
                 </div>
             </div>
@@ -707,7 +714,7 @@ const ExamB1Screen = () => {
                     }}
                     className={`flex-1 py-3 px-4 text-sm font-bold rounded-lg transition-all whitespace-nowrap ${currentSection === 'hoeren' ? 'bg-white dark:bg-gray-700 shadow text-indigo-600 dark:text-indigo-400' : 'text-gray-500 hover:text-gray-700 dark:hover:text-gray-300'}`}
                 >
-                    🎧 Hören (Escuchar)
+                    {t.tabHoeren}
                 </button>
             </div>
 
@@ -735,7 +742,7 @@ const ExamB1Screen = () => {
                     }}
                     className="bg-indigo-600 hover:bg-indigo-700 text-white px-8 py-3 rounded-2xl font-bold shadow-lg flex items-center gap-2 transition-transform hover:scale-105"
                 >
-                    <span>✅</span> Terminar Simulacro
+                    <span>✅</span> {t.examFinish}
                 </button>
             </div>
 

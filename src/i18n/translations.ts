@@ -98,6 +98,32 @@ export interface Translations {
     // Feedback messages
     correctOrder: string;
     wrongOrder: string;
+    // Session
+    loading: string;
+    continueBtn2: string;
+    betterOption: string;
+    correctSolution: string;
+    // Theory
+    understood: string;
+    // Exam B1
+    examSubtitle: string;
+    examFinish: string;
+    writeAnswerHere: string;
+    wordCount: string;
+    viewSolution: string;
+    hideSolution: string;
+    correctWithAI: string;
+    correcting: string;
+    sampleSolution: string;
+    instructionsSchreiben: string;
+    instructionsSchreibenDesc: string;
+    instructionsLesen: string;
+    instructionsLesenDesc: string;
+    instructionsHoeren: string;
+    instructionsHoerenDesc: string;
+    tabHoeren: string;
+    checkAnswers: string;
+    aiConnectionError: string;
 }
 
 export const translations: Record<Lang, Translations> = {
@@ -179,6 +205,29 @@ export const translations: Record<Lang, Translations> = {
         creativeLocalPlaceholder: 'Ej: Ich packe meinen Koffer...',
         correctOrder: '¡Orden correcto!',
         wrongOrder: 'Orden incorrecto.',
+        loading: 'Cargando...',
+        continueBtn2: 'Continuar',
+        betterOption: 'Mejor opción / Ejemplo:',
+        correctSolution: 'Solución correcta:',
+        understood: 'Entendido',
+        examSubtitle: 'Evaluación Completa',
+        examFinish: 'Terminar Simulacro',
+        writeAnswerHere: 'Escribe tu respuesta aquí...',
+        wordCount: 'palabras',
+        viewSolution: '📖 Ver Solución',
+        hideSolution: '❌ Ocultar',
+        correctWithAI: 'Corregir con IA',
+        correcting: 'Corrigiendo...',
+        sampleSolution: 'Musterlösung (Solución Modelo)',
+        instructionsSchreiben: 'Instrucciones (Schreiben)',
+        instructionsSchreibenDesc: 'Completa las 3 tareas. Usa "Corregir con IA" para recibir feedback instantáneo.',
+        instructionsLesen: 'Instrucciones (Lesen)',
+        instructionsLesenDesc: 'Lee los textos y completa los ejercicios. Pulsa "Comprobar" para validar tus respuestas.',
+        instructionsHoeren: 'Instrucciones (Hören)',
+        instructionsHoerenDesc: 'Escucha los audios y responde a las preguntas.',
+        tabHoeren: '🎧 Hören (Escuchar)',
+        checkAnswers: 'Comprobar',
+        aiConnectionError: 'Error de conexión con IA',
     },
     en: {
         check: 'Check',
@@ -258,6 +307,29 @@ export const translations: Record<Lang, Translations> = {
         creativeLocalPlaceholder: 'E.g.: Ich packe meinen Koffer...',
         correctOrder: 'Correct order!',
         wrongOrder: 'Wrong order.',
+        loading: 'Loading...',
+        continueBtn2: 'Continue',
+        betterOption: 'Better option / Example:',
+        correctSolution: 'Correct solution:',
+        understood: 'Got it',
+        examSubtitle: 'Full Assessment',
+        examFinish: 'Finish Mock Exam',
+        writeAnswerHere: 'Write your answer here...',
+        wordCount: 'words',
+        viewSolution: '📖 View Solution',
+        hideSolution: '❌ Hide',
+        correctWithAI: 'Correct with AI',
+        correcting: 'Correcting...',
+        sampleSolution: 'Musterlösung (Model Solution)',
+        instructionsSchreiben: 'Instructions (Schreiben)',
+        instructionsSchreibenDesc: 'Complete the 3 tasks. Use "Correct with AI" to receive instant feedback.',
+        instructionsLesen: 'Instructions (Lesen)',
+        instructionsLesenDesc: 'Read the texts and complete the exercises. Press "Check" to validate your answers.',
+        instructionsHoeren: 'Instructions (Hören)',
+        instructionsHoerenDesc: 'Listen to the audio and answer the questions.',
+        tabHoeren: '🎧 Hören (Listen)',
+        checkAnswers: 'Check',
+        aiConnectionError: 'AI connection error',
     },
 };
 
