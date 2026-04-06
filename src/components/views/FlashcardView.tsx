@@ -4,7 +4,7 @@ import { GameContext } from '../../context/GameContext';
 import type { Chunk } from '../../types';
 import { useAudio } from '../../hooks/useAudio';
 import GermanTextRenderer from '../GermanTextRenderer';
-import { useTranslation } from '../../i18n/translations';
+import { useTranslation, useLanguage, getChunkText } from '../../i18n/translations';
 
 const FlashcardView = ({ chunk, onNext }: { chunk: Chunk, onNext: () => void }) => {
     // FIX: Direct context access for theme
@@ -17,9 +17,13 @@ const FlashcardView = ({ chunk, onNext }: { chunk: Chunk, onNext: () => void }) 
     const backClass = isDark ? 'bg-gray-900 border-indigo-500' : 'bg-indigo-50 border-indigo-200';
     const backText = isDark ? 'text-white' : 'text-gray-900';
     const t = useTranslation();
+    const lang = useLanguage();
 
     const [isFlipped, setIsFlipped] = useState(false);
     const { speak } = useAudio();
+
+    const displayText = getChunkText(chunk, lang);
+    const sourceFlag = lang === 'en' ? '🇬🇧' : '🇪🇸';
 
     const handleFlip = () => {
         setIsFlipped(!isFlipped);
@@ -31,8 +35,8 @@ const FlashcardView = ({ chunk, onNext }: { chunk: Chunk, onNext: () => void }) 
             <div className={`relative w-full max-w-sm aspect-[4/5] transition-transform duration-700 [transform-style:preserve-3d] ${isFlipped ? 'rotate-y-180' : ''}`}>
                 {/* Frente */}
                 <div className={`absolute w-full h-full rounded-3xl shadow-xl flex flex-col items-center justify-center p-6 border-2 [backface-visibility:hidden] ${frontClass}`}>
-                    <span className="text-4xl mb-4">🇪🇸</span>
-                    <p className={`text-xl font-bold text-center ${frontText}`}>{chunk.spanish}</p>
+                    <span className="text-4xl mb-4">{sourceFlag}</span>
+                    <p className={`text-xl font-bold text-center ${frontText}`}>{displayText}</p>
                     <p className="text-xs text-gray-500 mt-8 absolute bottom-6">{t.tapToFlip}</p>
                 </div>
                 {/* Dorso */}

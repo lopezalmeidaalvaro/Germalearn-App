@@ -386,3 +386,30 @@ export const useTranslation = (): Translations => {
     const lang: Lang = context?.state.user?.baseLanguage ?? 'es';
     return translations[lang];
 };
+
+/**
+ * Hook that returns just the current language code.
+ */
+export const useLanguage = (): Lang => {
+    const context = useContext(GameContext);
+    return context?.state.user?.baseLanguage ?? 'es';
+};
+
+/**
+ * Gets the display text for a Chunk based on the current language.
+ * Returns chunk.english when lang='en' and it exists, otherwise chunk.spanish.
+ */
+export const getChunkText = (chunk: { spanish: string; english?: string }, lang: Lang): string => {
+    if (lang === 'en' && chunk.english) return chunk.english;
+    return chunk.spanish;
+};
+
+/**
+ * Resolves a BilingualText object or plain string to the correct language.
+ */
+export const getBilingualText = (text: string | { es: string; en: string } | undefined, lang: Lang): string => {
+    if (!text) return '';
+    if (typeof text === 'string') return text;
+    return lang === 'en' ? text.en : text.es;
+};
+

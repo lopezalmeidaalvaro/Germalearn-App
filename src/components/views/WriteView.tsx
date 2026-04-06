@@ -4,7 +4,7 @@ import type { Chunk, FeedbackResult } from '../../types';
 import { useAudio } from '../../hooks/useAudio';
 import { LinguisticEngine } from '../../logic/linguistic';
 import { GameContext } from '../../context/GameContext';
-import { useTranslation } from '../../i18n/translations';
+import { useTranslation, useLanguage, getChunkText } from '../../i18n/translations';
 
 const WriteView = ({ chunk, onSubmit }: { chunk: Chunk, onSubmit: (res: FeedbackResult) => void }) => {
     // START FIX: Direct context access
@@ -13,6 +13,7 @@ const WriteView = ({ chunk, onSubmit }: { chunk: Chunk, onSubmit: (res: Feedback
     const inputClass = isDark ? 'bg-gray-900 border-gray-700 text-white' : 'bg-white border-gray-200 text-gray-900';
     const containerClass = isDark ? 'bg-gray-800 border-gray-700 text-white' : 'bg-white border-gray-200 text-gray-900';
     const t = useTranslation();
+    const lang = useLanguage();
     // END FIX
 
     const [input, setInput] = useState('');
@@ -35,7 +36,7 @@ const WriteView = ({ chunk, onSubmit }: { chunk: Chunk, onSubmit: (res: Feedback
             <h3 className="text-gray-500 font-bold mb-6 text-center uppercase tracking-widest text-sm">{t.translateExactly}</h3>
             <div className="flex items-start mb-6">
                 <div className="w-12 h-12 mr-3 rounded-xl bg-indigo-100 flex items-center justify-center text-2xl shrink-0">🇩🇪</div>
-                <div className={`p-4 rounded-xl rounded-tl-none border-2 text-lg font-medium ${containerClass}`}>{chunk.spanish}</div>
+                <div className={`p-4 rounded-xl rounded-tl-none border-2 text-lg font-medium ${containerClass}`}>{getChunkText(chunk, lang)}</div>
             </div>
             <div className="relative">
                 <textarea

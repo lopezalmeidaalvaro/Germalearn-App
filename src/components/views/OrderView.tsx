@@ -2,7 +2,7 @@ import { useState, useMemo, useContext, useEffect } from 'react';
 import { Shuffle } from 'lucide-react';
 import { GameContext } from '../../context/GameContext';
 import type { Chunk, FeedbackResult } from '../../types';
-import { useTranslation } from '../../i18n/translations';
+import { useTranslation, useLanguage, getChunkText } from '../../i18n/translations';
 
 const OrderView = ({ chunk, onSubmit }: { chunk: Chunk, onSubmit: (res: FeedbackResult) => void }) => {
     // START FIX: Direct context access
@@ -12,6 +12,7 @@ const OrderView = ({ chunk, onSubmit }: { chunk: Chunk, onSubmit: (res: Feedback
     const selectedBtnClass = isDark ? 'bg-gray-700 text-white' : 'bg-white text-gray-800';
     const optionBtnClass = isDark ? 'bg-indigo-900 text-indigo-200' : 'bg-indigo-100 text-indigo-700';
     const t = useTranslation();
+    const lang = useLanguage();
     // END FIX
 
     const [selected, setSelected] = useState<string[]>([]);
@@ -30,7 +31,7 @@ const OrderView = ({ chunk, onSubmit }: { chunk: Chunk, onSubmit: (res: Feedback
     return (
         <div className="flex flex-col h-full">
             <h3 className="text-gray-500 font-bold mb-6 text-center uppercase tracking-widest text-sm flex justify-center gap-2"><Shuffle size={16} /> {t.orderSentence}</h3>
-            <p className="text-center text-gray-600 dark:text-gray-400 mb-4 italic">"{chunk.spanish}"</p>
+            <p className="text-center text-gray-600 dark:text-gray-400 mb-4 italic">"{getChunkText(chunk, lang)}"</p>
             <div className={`p-4 rounded-xl min-h-[80px] mb-6 flex flex-wrap gap-2 items-center justify-center border-2 border-dashed ${dropZoneClass}`}>
                 {selected.map((word, i) => (
                     <button key={i} onClick={() => setSelected(s => s.filter((_, idx) => idx !== i))} className={`px-3 py-2 rounded-lg shadow font-medium animate-in zoom-in ${selectedBtnClass}`}>{word}</button>

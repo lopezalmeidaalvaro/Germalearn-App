@@ -12,6 +12,7 @@ export interface Chunk {
     id: ChunkId;
     german: string;
     spanish: string;
+    english?: string;  // English translation (used when baseLanguage = 'en')
     grammarTags: string[];
     difficulty: number;
     chapterId?: string;
