@@ -6,6 +6,7 @@ import React from 'react';
 
 export type ChunkId = string;
 export type ExerciseType = 'THEORY' | 'FLASHCARD' | 'WRITE' | 'ORDER' | 'CREATIVE' | 'PAIRS' | 'CHAT';
+export type BilingualText = { es: string; en: string };
 
 export interface Chunk {
     id: ChunkId;
@@ -52,7 +53,7 @@ export interface UserMastery {
 export interface LevelNode {
     id: string;
     type: 'intro' | 'practice' | 'challenge' | 'creative' | 'boss' | 'chat';
-    title: string;
+    title: string | BilingualText;
     icon: React.ElementType;
     difficulty?: number;
     onlyCreative?: boolean;

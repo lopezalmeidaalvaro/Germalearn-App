@@ -10,6 +10,7 @@ const GrammarMapScreen = () => {
     const { state, dispatch } = context;
     const isDark = state.user?.theme === 'dark';
     const t = useTranslation();
+    const baseLang = state.user?.baseLanguage ?? 'es';
 
     return (
         <div className="max-w-4xl mx-auto p-4 md:p-6 space-y-8 animate-in fade-in duration-500 pb-20">
@@ -26,7 +27,7 @@ const GrammarMapScreen = () => {
                         <div className={`absolute -left-[18px] top-0 w-8 h-8 rounded-full flex items-center justify-center text-white font-bold text-xs ${lvl.color}`}>
                             {lvl.level}
                         </div>
-                        <h2 className="text-xl font-bold mb-4">{lvl.title}</h2>
+                        <h2 className="text-xl font-bold mb-4">{typeof lvl.title === 'object' ? lvl.title[baseLang] : lvl.title}</h2>
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             {lvl.systems.map((sys) => {
@@ -42,7 +43,7 @@ const GrammarMapScreen = () => {
                                         </div>
                                         <div>
                                             <h3 className="font-bold text-lg">{sys.name}</h3>
-                                            <p className="text-sm opacity-60 leading-tight">{sys.desc}</p>
+                                            <p className="text-sm opacity-60 leading-tight">{typeof sys.desc === 'object' ? sys.desc[baseLang] : sys.desc}</p>
                                         </div>
                                     </div>
                                 )

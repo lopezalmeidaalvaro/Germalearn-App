@@ -10,6 +10,7 @@ const ChapterPathScreen = () => {
     if (!context) return null;
     const { state, dispatch } = context;
     const t = useTranslation();
+    const baseLang = state.user?.baseLanguage ?? 'es';
 
     const isDark = state.user?.theme === 'dark';
     const chapter = CHAPTERS.find(c => c.id === state.selectedChapterId);
@@ -71,7 +72,7 @@ const ChapterPathScreen = () => {
                                 )}
                             </button>
                             <div className={`absolute left-[52%] md:left-[55%] top-6 bg-white dark:bg-gray-800 px-3 py-1 rounded-xl shadow-md border dark:border-gray-700 text-xs font-bold whitespace-nowrap ${isLocked ? 'opacity-50' : ''} ${isDark ? 'text-white' : 'text-gray-700'}`}>
-                                {level.title}
+                                {typeof level.title === 'object' ? level.title[baseLang] : level.title}
                                 {isLocked && <span className="block text-[10px] text-red-500">{t.levelRequired} {GamificationLogic.getRequiredLevel(index)}</span>}
                                 <div className="absolute left-[-6px] top-1/2 -translate-y-1/2 w-3 h-3 bg-white dark:bg-gray-800 border-l border-b dark:border-gray-700 transform rotate-45"></div>
                             </div>

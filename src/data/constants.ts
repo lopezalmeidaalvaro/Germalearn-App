@@ -10,12 +10,12 @@ import type { Chunk, LevelNode, RoleplayScenario } from '../types';
 // ==========================================
 
 export const CHAPTER_PATH_NODES: LevelNode[] = [
-    { id: 'l1', type: 'intro', title: 'Introducción', icon: BookOpen, difficulty: 1 },
-    { id: 'l2', type: 'practice', title: 'Práctica Básica', icon: Layers, difficulty: 1 },
-    { id: 'l3', type: 'practice', title: 'Refuerzo', icon: Shuffle, difficulty: 2 },
-    { id: 'l4', type: 'chat', title: 'Roleplay: Misión', icon: MessageCircle, chatId: 'dynamic' },
-    { id: 'l5', type: 'challenge', title: 'Avanzado', icon: Zap, difficulty: 3 },
-    { id: 'l6', type: 'boss', title: 'Gran Desafío', icon: Trophy, isGym: true }
+    { id: 'l1', type: 'intro', title: { es: 'Introducción', en: 'Introduction' }, icon: BookOpen, difficulty: 1 },
+    { id: 'l2', type: 'practice', title: { es: 'Práctica Básica', en: 'Basic Practice' }, icon: Layers, difficulty: 1 },
+    { id: 'l3', type: 'practice', title: { es: 'Refuerzo', en: 'Reinforcement' }, icon: Shuffle, difficulty: 2 },
+    { id: 'l4', type: 'chat', title: { es: 'Roleplay: Misión', en: 'Roleplay: Mission' }, icon: MessageCircle, chatId: 'dynamic' },
+    { id: 'l5', type: 'challenge', title: { es: 'Avanzado', en: 'Advanced' }, icon: Zap, difficulty: 3 },
+    { id: 'l6', type: 'boss', title: { es: 'Gran Desafío', en: 'Grand Challenge' }, icon: Trophy, isGym: true }
 ];
 
 export const CHAT_SCENARIOS: Record<string, RoleplayScenario> = {
@@ -106,10 +106,10 @@ export const CHAT_SCENARIOS: Record<string, RoleplayScenario> = {
 
 export const GRAMMAR_SYSTEMS = [
     {
-        level: 'A1', color: 'bg-green-500', title: 'Fundamentos (A1)',
+        level: 'A1', color: 'bg-green-500', title: { es: 'Fundamentos (A1)', en: 'Foundations (A1)' },
         systems: [
             {
-                id: 'a1-struc', icon: Puzzle, name: 'Arquitectura V2', desc: 'El verbo siempre en 2ª posición.',
+                id: 'a1-struc', icon: Puzzle, name: 'Arquitectura V2', desc: { es: 'El verbo siempre en 2ª posición.', en: 'Verb always in 2nd position.' },
                 theory: [{ title: 'Regla de Oro: V2', content: 'En una oración principal, el verbo conjugado SIEMPRE ocupa la posición 2.' }],
                 exercises: [
                     { id: 'g-a1-01', german: 'Ich spiele heute Fußball.', spanish: 'Yo juego hoy al fútbol.', keywords: ['spiele'], difficulty: 1, grammarTags: ['v2'] },
@@ -120,7 +120,7 @@ export const GRAMMAR_SYSTEMS = [
                 ]
             },
             {
-                id: 'a1-cases', icon: Key, name: 'Llaves: Nom/Akk', desc: 'Sujeto vs Objeto.',
+                id: 'a1-cases', icon: Key, name: 'Llaves: Nom/Akk', desc: { es: 'Sujeto vs Objeto.', en: 'Subject vs Object.' },
                 theory: [{ title: 'Nominativ vs Akkusativ', content: 'Nominativ: El sujeto (Der Mann). Akkusativ: El objeto (Den Mann).' }],
                 exercises: [
                     { id: 'g-a1-04', german: 'Der Mann isst den Apfel.', spanish: 'El hombre come la manzana.', keywords: ['der', 'den', 'apfel'], difficulty: 1, grammarTags: ['akk'] },
@@ -131,7 +131,7 @@ export const GRAMMAR_SYSTEMS = [
                 ]
             },
             {
-                id: 'a1-modals', icon: Anchor, name: 'Verbos Modales', desc: 'Können, müssen, wollen.',
+                id: 'a1-modals', icon: Anchor, name: 'Verbos Modales', desc: { es: 'Können, müssen, wollen.', en: 'Können, müssen, wollen.' },
                 theory: [{ title: 'Verbos Modales', content: 'El verbo modal se conjuga en posición 2. El otro verbo va al FINAL en infinitivo.' }],
                 exercises: [
                     { id: 'g-a1-07', german: 'Ich kann gut schwimmen.', spanish: 'Sé nadar bien.', keywords: ['kann', 'schwimmen'], difficulty: 1, grammarTags: ['modal'] },
@@ -142,7 +142,7 @@ export const GRAMMAR_SYSTEMS = [
                 ]
             },
             {
-                id: 'a1-articles', icon: Circle, name: 'Artículos y Género', desc: 'Der, Die, Das, Ein, Eine.',
+                id: 'a1-articles', icon: Circle, name: 'Artículos y Género', desc: { es: 'Der, Die, Das, Ein, Eine.', en: 'Der, Die, Das, Ein, Eine.' },
                 theory: [{ title: 'Género', content: '3 géneros: Masculino (Der), Femenino (Die), Neutro (Das).' }],
                 exercises: [
                     { id: 'g-a1-13', german: 'Das ist ein Tisch.', spanish: 'Esto es una mesa.', keywords: ['ein', 'tisch'], difficulty: 1, grammarTags: ['nom'] },
@@ -157,10 +157,10 @@ export const GRAMMAR_SYSTEMS = [
     {
         level: 'A2',
         color: 'bg-yellow-500',
-        title: 'Narrativa (A2)',
+        title: { es: 'Narrativa (A2)', en: 'Narrative (A2)' },
         systems: [
             {
-                id: 'a2-perfekt', icon: Cog, name: 'Motor: Perfekt', desc: 'Pasado hablado.',
+                id: 'a2-perfekt', icon: Cog, name: 'Motor: Perfekt', desc: { es: 'Pasado hablado.', en: 'Spoken past tense.' },
                 theory: [{ title: 'Perfekt', content: 'Auxiliar (Pos 2) + Participio (Final).' }],
                 exercises: [
                     { id: 'g-a2-01', german: 'Ich habe gestern Fußball gespielt.', spanish: 'Ayer jugué al fútbol.', keywords: ['habe', 'gespielt'], difficulty: 2, grammarTags: ['perfekt'] },
@@ -172,7 +172,7 @@ export const GRAMMAR_SYSTEMS = [
                 ]
             },
             {
-                id: 'a2-preps', icon: Map, name: 'Ubicación (Dat/Akk)', desc: 'Wechselpräpositionen.',
+                id: 'a2-preps', icon: Map, name: 'Ubicación (Dat/Akk)', desc: { es: 'Wechselpräpositionen.', en: 'Two-way prepositions.' },
                 theory: [{ title: 'Preposiciones', content: 'Wo? (Estático) -> Dativo. Wohin? (Movimiento) -> Acusativo.' }],
                 exercises: [
                     { id: 'g-a2-05', german: 'Das Buch liegt auf dem Tisch.', spanish: 'El libro está sobre la mesa.', keywords: ['auf', 'dem'], difficulty: 2, grammarTags: ['dat'] },
@@ -184,7 +184,7 @@ export const GRAMMAR_SYSTEMS = [
                 ]
             },
             {
-                id: 'a2-prateritum', icon: BookOpen, name: 'Präteritum Básico', desc: 'War y Hatte.',
+                id: 'a2-prateritum', icon: BookOpen, name: 'Präteritum Básico', desc: { es: 'War y Hatte.', en: 'War and Hatte.' },
                 theory: [{ title: 'Präteritum', content: 'Sein -> War. Haben -> Hatte.' }],
                 exercises: [
                     { id: 'g-a2-11', german: 'Ich war gestern krank.', spanish: 'Ayer estuve enfermo.', keywords: ['war', 'krank'], difficulty: 2, grammarTags: ['präteritum'] },
@@ -195,7 +195,7 @@ export const GRAMMAR_SYSTEMS = [
                 ]
             },
             {
-                id: 'a2-adj', icon: Sparkles, name: 'Adjetivos (Intro)', desc: 'Finales básicos (-e, -en).',
+                id: 'a2-adj', icon: Sparkles, name: 'Adjetivos (Intro)', desc: { es: 'Finales básicos (-e, -en).', en: 'Basic endings (-e, -en).' },
                 theory: [{ title: 'Adjetivos', content: 'Der rote Apfel (Nom). Den roten Apfel (Akk).' }],
                 exercises: [
                     { id: 'g-a2-16', german: 'Der große Mann lacht.', spanish: 'El hombre grande ríe.', keywords: ['große', 'mann'], difficulty: 2, grammarTags: ['adj'] },
@@ -205,7 +205,7 @@ export const GRAMMAR_SYSTEMS = [
                 ]
             },
             {
-                id: 'a2-prep-akk-new', icon: Zap, name: 'Preposiciones (Akk)', desc: 'Durch, für, gegen, ohne, um.',
+                id: 'a2-prep-akk-new', icon: Zap, name: 'Preposiciones (Akk)', desc: { es: 'Durch, für, gegen, ohne, um.', en: 'Durch, für, gegen, ohne, um.' },
                 theory: [{ title: 'Acusativo', content: 'Estas preposiciones SIEMPRE piden Acusativo: Durch (a través), Für (para), Gegen (contra), Ohne (sin), Um (alrededor).' }],
                 exercises: [
                     { id: 'g-a2-prep-akk-01', german: 'Der Hund läuft durch den Park.', spanish: 'El perro corre a través del parque.', keywords: ['durch', 'den'], difficulty: 2, grammarTags: ['akk', 'prep'] },
@@ -214,7 +214,7 @@ export const GRAMMAR_SYSTEMS = [
                 ]
             },
             {
-                id: 'a2-prep-dat-new', icon: Anchor, name: 'Preposiciones (Dat)', desc: 'Aus, bei, mit, nach, seit, von, zu.',
+                id: 'a2-prep-dat-new', icon: Anchor, name: 'Preposiciones (Dat)', desc: { es: 'Aus, bei, mit, nach, seit, von, zu.', en: 'Aus, bei, mit, nach, seit, von, zu.' },
                 theory: [{ title: 'Dativo', content: 'Siempre Dativo: Aus (de/origen), Bei (en casa de), Mit (con), Nach (hacia), Seit (desde), Von (de), Zu (a).' }],
                 exercises: [
                     { id: 'g-a2-prep-dat-01', german: 'Ich komme aus dem Haus.', spanish: 'Vengo de la casa.', keywords: ['aus', 'dem'], difficulty: 2, grammarTags: ['dat', 'prep'] },
@@ -223,7 +223,7 @@ export const GRAMMAR_SYSTEMS = [
                 ]
             },
             {
-                id: 'a2-prep-mix-new', icon: Shuffle, name: 'Preposiciones Mixtas', desc: '¿Lugar o Movimiento?',
+                id: 'a2-prep-mix-new', icon: Shuffle, name: 'Preposiciones Mixtas', desc: { es: '¿Lugar o Movimiento?', en: 'Location or Movement?' },
                 theory: [{ title: 'Wechselpräpositionen', content: 'Wo? (¿Dónde estoy?) -> Dativo (Estático).\nWohin? (¿A dónde voy?) -> Acusativo (Movimiento).' }],
                 exercises: [
                     { id: 'g-a2-prep-mix-01', german: 'Die Katze ist unter dem Tisch.', spanish: 'El gato está bajo la mesa.', keywords: ['unter', 'dem'], difficulty: 2, grammarTags: ['dat', 'prep'] },
@@ -236,10 +236,10 @@ export const GRAMMAR_SYSTEMS = [
     {
         level: 'B1',
         color: 'bg-orange-500',
-        title: 'Conexiones (B1)',
+        title: { es: 'Conexiones (B1)', en: 'Connections (B1)' },
         systems: [
             {
-                id: 'b1-sub', icon: Grid, name: 'Subordinadas', desc: 'Verbo al final (weil, dass).',
+                id: 'b1-sub', icon: Grid, name: 'Subordinadas', desc: { es: 'Verbo al final (weil, dass).', en: 'Verb at the end (weil, dass).' },
                 theory: [{ title: 'Subordinadas', content: 'Verbo al final con weil/dass.' }],
                 exercises: [
                     { id: 'g-b1-01', german: 'Ich lerne Deutsch, weil es wichtig ist.', spanish: 'Aprendo alemán porque es importante.', keywords: ['weil', 'ist'], difficulty: 3, grammarTags: ['nebensatz'] },
@@ -251,7 +251,7 @@ export const GRAMMAR_SYSTEMS = [
                 ]
             },
             {
-                id: 'b1-verb-prep', icon: MessageCircle, name: 'Verbos + Prep', desc: 'Warten auf, Träumen von...',
+                id: 'b1-verb-prep', icon: MessageCircle, name: 'Verbos + Prep', desc: { es: 'Warten auf, Träumen von...', en: 'Warten auf, Träumen von...' },
                 theory: [{ title: 'Verbos con Preposición', content: 'Warten auf + Akk. Träumen von + Dat.' }],
                 exercises: [
                     { id: 'g-b1-05', german: 'Ich warte auf den Bus.', spanish: 'Espero al autobús.', keywords: ['warte', 'auf', 'den'], difficulty: 3, grammarTags: ['prep'] },
@@ -263,7 +263,7 @@ export const GRAMMAR_SYSTEMS = [
                 ]
             },
             {
-                id: 'b1-relativ', icon: LinkIcon, name: 'Frases Relativas', desc: 'Der Mann, der...',
+                id: 'b1-relativ', icon: LinkIcon, name: 'Frases Relativas', desc: { es: 'Der Mann, der...', en: 'Der Mann, der...' },
                 theory: [{ title: 'Relativas', content: 'Verbo al final.' }],
                 exercises: [
                     { id: 'g-b1-11', german: 'Das ist der Mann, der mich liebt.', spanish: 'Ese es el hombre que me ama.', keywords: ['der', 'liebt'], difficulty: 3, grammarTags: ['relativ'] },
@@ -273,7 +273,7 @@ export const GRAMMAR_SYSTEMS = [
                 ]
             },
             {
-                id: 'b1-passiv', icon: Settings, name: 'Voz Pasiva', desc: 'Werden + Partizip II.',
+                id: 'b1-passiv', icon: Settings, name: 'Voz Pasiva', desc: { es: 'Werden + Partizip II.', en: 'Werden + Partizip II.' },
                 theory: [{ title: 'Pasiva', content: 'Werden + Partizip II.' }],
                 exercises: [
                     { id: 'g-b1-15', german: 'Der Müll wird getrennt.', spanish: 'La basura es separada.', keywords: ['wird', 'getrennt'], difficulty: 3, grammarTags: ['passiv'] },
@@ -283,7 +283,7 @@ export const GRAMMAR_SYSTEMS = [
                 ]
             },
             {
-                id: 'b1-cases', icon: BookOpen, name: 'Los 4 Casos y Preposiciones', desc: 'Genitivo, preposiciones mixtas y repaso total.',
+                id: 'b1-cases', icon: BookOpen, name: 'Los 4 Casos y Preposiciones', desc: { es: 'Genitivo, preposiciones mixtas y repaso total.', en: 'Genitive, mixed prepositions and full review.' },
                 theory: [
                     { title: 'El Genitivo (Wessen?)', content: 'Indica posesión. Masculino/Neutro: des Vaters (-s). Femenino/Plural: der Mutter.' },
                     { title: 'Preposiciones Mixtas', content: 'Wo? (Dativo) vs Wohin? (Acusativo). An, auf, hinter, in, neben, über, unter, vor, zwischen.' },
@@ -298,7 +298,7 @@ export const GRAMMAR_SYSTEMS = [
                 ]
             },
             {
-                id: 'b1-geo', icon: Globe, name: 'Geografía y Destinos', desc: 'Wohin? in die Türkei, ans Meer.',
+                id: 'b1-geo', icon: Globe, name: 'Geografía y Destinos', desc: { es: 'Wohin? in die Türkei, ans Meer.', en: 'Wohin? in die Türkei, ans Meer.' },
                 theory: [{ title: 'Geografía', content: 'In die Türkei (Akk). Ans Meer (Akk). Nach Berlin.' }],
                 exercises: [
                     { id: 'g-b1-24', german: 'Ich reise in die Türkei.', spanish: 'Viajo a Turquía.', keywords: ['in', 'die', 'türkei'], difficulty: 3, grammarTags: ['prep', 'geo'] },
@@ -308,7 +308,7 @@ export const GRAMMAR_SYSTEMS = [
                 ]
             },
             {
-                id: 'b1-infinitive', icon: Anchor, name: 'Infinitivos y Concesiones', desc: 'Zu + Infinitiv, Obwohl.',
+                id: 'b1-infinitive', icon: Anchor, name: 'Infinitivos y Concesiones', desc: { es: 'Zu + Infinitiv, Obwohl.', en: 'Zu + Infinitiv, Obwohl.' },
                 theory: [{ title: 'Infinitivos', content: 'Zu lernen. Obwohl es regnet.' }],
                 exercises: [
                     { id: 'g-b1-28', german: 'Es ist schwer, Deutsch zu lernen.', spanish: 'Es difícil aprender alemán.', keywords: ['zu', 'lernen'], difficulty: 3, grammarTags: ['nebensatz'] },
@@ -323,10 +323,10 @@ export const GRAMMAR_SYSTEMS = [
     {
         level: 'B2',
         color: 'bg-blue-600',
-        title: 'Maestría (B2)',
+        title: { es: 'Maestría (B2)', en: 'Mastery (B2)' },
         systems: [
             {
-                id: 'b2-konj', icon: Sparkles, name: 'Konjunktiv II', desc: 'Deseos y cortesía.',
+                id: 'b2-konj', icon: Sparkles, name: 'Konjunktiv II', desc: { es: 'Deseos y cortesía.', en: 'Wishes and politeness.' },
                 theory: [{ title: 'Konjunktiv II', content: 'Ich würde/hätte/wäre.' }],
                 exercises: [
                     { id: 'g-b2-01', german: 'Wenn ich reich wäre, würde ich reisen.', spanish: 'Si fuera rico, viajaría.', keywords: ['wäre', 'würde', 'reisen'], difficulty: 4, grammarTags: ['konj'] },
@@ -336,7 +336,7 @@ export const GRAMMAR_SYSTEMS = [
                 ]
             },
             {
-                id: 'b2-connect', icon: LinkIcon, name: 'Conectores Dobles', desc: 'Zwar... aber, weder... noch.',
+                id: 'b2-connect', icon: LinkIcon, name: 'Conectores Dobles', desc: { es: 'Zwar... aber, weder... noch.', en: 'Zwar... aber, weder... noch.' },
                 theory: [{ title: 'Conectores', content: 'Sowohl... als auch. Weder... noch.' }],
                 exercises: [
                     { id: 'g-b2-03', german: 'Er spricht sowohl Deutsch als auch Englisch.', spanish: 'Él habla tanto alemán como inglés.', keywords: ['sowohl', 'als', 'auch'], difficulty: 4, grammarTags: ['konj'] },
@@ -346,7 +346,7 @@ export const GRAMMAR_SYSTEMS = [
                 ]
             },
             {
-                id: 'b2-partizip', icon: Layers, name: 'Participios Adjetivales', desc: 'Das singende Kind.',
+                id: 'b2-partizip', icon: Layers, name: 'Participios Adjetivales', desc: { es: 'Das singende Kind.', en: 'Das singende Kind.' },
                 theory: [{ title: 'Participios', content: 'Como adjetivos.' }],
                 exercises: [
                     { id: 'g-b2-07', german: 'Der lachende Mann ist mein Vater.', spanish: 'El hombre que ríe es mi padre.', keywords: ['lachende', 'mann'], difficulty: 4, grammarTags: ['partizip'] },
@@ -356,7 +356,7 @@ export const GRAMMAR_SYSTEMS = [
                 ]
             },
             {
-                id: 'b2-conseq', icon: Zap, name: 'Causa y Efecto', desc: 'Deshalb, Sodass, Lassen.',
+                id: 'b2-conseq', icon: Zap, name: 'Causa y Efecto', desc: { es: 'Deshalb, Sodass, Lassen.', en: 'Deshalb, Sodass, Lassen.' },
                 theory: [{ title: 'Consecuencias', content: 'Deshalb (Por eso). Sodass (De modo que).' }],
                 exercises: [
                     { id: 'g-b2-11', german: 'Der Zug hatte Verspätung, deshalb bin ich spät.', spanish: 'El tren tuvo retraso, por eso llego tarde.', keywords: ['deshalb'], difficulty: 4, grammarTags: ['konj'] },
@@ -366,7 +366,7 @@ export const GRAMMAR_SYSTEMS = [
                 ]
             },
             {
-                id: 'b2-narrative', icon: BookOpen, name: 'Narrativa Temporal', desc: 'Präteritum y Preposiciones.',
+                id: 'b2-narrative', icon: BookOpen, name: 'Narrativa Temporal', desc: { es: 'Präteritum y Preposiciones.', en: 'Präteritum and Prepositions.' },
                 theory: [{ title: 'Narrativa', content: 'Präteritum escrito. Preposiciones temporales.' }],
                 exercises: [
                     { id: 'g-b2-15', german: 'Er lebte lange in Berlin.', spanish: 'Él vivió mucho tiempo en Berlín.', keywords: ['lebte'], difficulty: 4, grammarTags: ['präteritum'] },
@@ -376,7 +376,7 @@ export const GRAMMAR_SYSTEMS = [
                 ]
             },
             {
-                id: 'b2-pronom', icon: Shuffle, name: 'Adverbios Pronominales', desc: 'Wofür, Daran, Damit.',
+                id: 'b2-pronom', icon: Shuffle, name: 'Adverbios Pronominales', desc: { es: 'Wofür, Daran, Damit.', en: 'Wofür, Daran, Damit.' },
                 theory: [{ title: 'Pronominales', content: 'Wo(r)+Prep (Cosa?). Da(r)+Prep (Referencia).' }],
                 exercises: [
                     { id: 'g-b2-19', german: 'Woran denkst du?', spanish: '¿En qué piensas?', keywords: ['woran'], difficulty: 4, grammarTags: ['pron'] },
@@ -386,7 +386,7 @@ export const GRAMMAR_SYSTEMS = [
                 ]
             },
             {
-                id: 'b2-final', icon: Key, name: 'Finalidad', desc: 'Damit, Um... zu.',
+                id: 'b2-final', icon: Key, name: 'Finalidad', desc: { es: 'Damit, Um... zu.', en: 'Damit, Um... zu.' },
                 theory: [{ title: 'Finalidad', content: 'Um... zu (mismo sujeto). Damit (diferente sujeto).' }],
                 exercises: [
                     { id: 'g-b2-23', german: 'Ich lerne, um zu reisen.', spanish: 'Aprendo para viajar.', keywords: ['um', 'zu', 'reisen'], difficulty: 4, grammarTags: ['konj'] },
@@ -396,7 +396,7 @@ export const GRAMMAR_SYSTEMS = [
                 ]
             },
             {
-                id: 'b2-adj-decl', icon: Sparkles, name: 'Adi. Comparativos', desc: 'Ein schnelleres Auto.',
+                id: 'b2-adj-decl', icon: Sparkles, name: 'Adi. Comparativos', desc: { es: 'Ein schnelleres Auto.', en: 'Ein schnelleres Auto.' },
                 theory: [{ title: 'Declinación Comparativa', content: 'Adjetivo comparativo + terminación del adjetivo.' }],
                 exercises: [
                     { id: 'g-b2-27', german: 'Ein schnelleres Auto ist teuer.', spanish: 'Un coche más rápido es caro.', keywords: ['schnelleres'], difficulty: 4, grammarTags: ['adj'] },
@@ -406,7 +406,7 @@ export const GRAMMAR_SYSTEMS = [
                 ]
             },
             {
-                id: 'b2-n-dek', icon: Puzzle, name: 'N-Deklination', desc: 'Den Studenten, Des Kunden.',
+                id: 'b2-n-dek', icon: Puzzle, name: 'N-Deklination', desc: { es: 'Den Studenten, Des Kunden.', en: 'Den Studenten, Des Kunden.' },
                 theory: [{ title: 'N-Deklination', content: 'Masculinos débiles (terminan en -e, -and, -ent, -ist) añaden -n en Acusativo/Dativo/Genitivo.' }],
                 exercises: [
                     { id: 'g-b2-31', german: 'Ich sehe den Studenten.', spanish: 'Veo al estudiante.', keywords: ['den', 'studenten'], difficulty: 4, grammarTags: ['n-dek'] },
@@ -416,7 +416,7 @@ export const GRAMMAR_SYSTEMS = [
                 ]
             },
             {
-                id: 'b2-relativ-2', icon: LinkIcon, name: 'Relativas Complejas', desc: 'Dem ich helfe, Womit.',
+                id: 'b2-relativ-2', icon: LinkIcon, name: 'Relativas Complejas', desc: { es: 'Dem ich helfe, Womit.', en: 'Dem ich helfe, Womit.' },
                 theory: [{ title: 'Relativas Avanzadas', content: 'Uso de Dativo, Genitivo y Preposiciones en oraciones relativas.' }],
                 exercises: [
                     { id: 'g-b2-35', german: 'Der Mann, dem ich helfe, ist nett.', spanish: 'El hombre a quien ayudo es amable.', keywords: ['dem', 'helfe'], difficulty: 4, grammarTags: ['relativ', 'dat'] },
@@ -426,7 +426,7 @@ export const GRAMMAR_SYSTEMS = [
                 ]
             },
             {
-                id: 'b2-futur-sys', icon: Telescope, name: 'Futuro I', desc: 'Werden + Infinitiv.',
+                id: 'b2-futur-sys', icon: Telescope, name: 'Futuro I', desc: { es: 'Werden + Infinitiv.', en: 'Werden + Infinitiv.' },
                 theory: [{ title: 'Futuro I', content: 'Werden (presente) + Infinitiv (final). Para planes o suposiciones.' }],
                 exercises: [
                     { id: 'g-b2-39', german: 'Es wird morgen regnen.', spanish: 'Mañana lloverá.', keywords: ['wird', 'regnen'], difficulty: 4, grammarTags: ['futur'] },
@@ -440,10 +440,10 @@ export const GRAMMAR_SYSTEMS = [
     {
         level: 'B2+',
         color: 'bg-indigo-600',
-        title: 'Nivel B2: Profundización',
+        title: { es: 'Nivel B2: Profundización', en: 'Level B2: Deep Dive' },
         systems: [
             {
-                id: 'b2-plusquam', icon: History, name: 'Plusquamperfekt', desc: 'Cuando algo ocurrió antes que otra cosa en el pasado.',
+                id: 'b2-plusquam', icon: History, name: 'Plusquamperfekt', desc: { es: 'Cuando algo ocurrió antes que otra cosa en el pasado.', en: 'When something happened before another past event.' },
                 theory: [{ title: 'Plusquamperfekt', content: 'Estructura: hatte/war + Participio II. Se usa para acciones anteriores a otro momento del pasado.' }],
                 exercises: [
                     { id: 'g-b2-plus-01', german: 'Ich hatte gegessen, bevor er kam.', spanish: 'Yo había comido antes de que él viniera.', keywords: ['hatte', 'gegessen'], difficulty: 4, grammarTags: ['plusquamperfekt'] },
@@ -452,7 +452,7 @@ export const GRAMMAR_SYSTEMS = [
                 ]
             },
             {
-                id: 'b2-temp-conn', icon: ArrowRightLeft, name: 'Conectores Temporales', desc: 'Ordenar historias: bevor, nachdem, während, bis.',
+                id: 'b2-temp-conn', icon: ArrowRightLeft, name: 'Conectores Temporales', desc: { es: 'Ordenar historias: bevor, nachdem, während, bis.', en: 'Ordering stories: bevor, nachdem, während, bis.' },
                 theory: [{ title: 'Conectores', content: 'Nachdem (con Plusquamperfekt) -> Frase principal (con Präteritum).' }],
                 exercises: [
                     { id: 'g-b2-temp-01', german: 'Bevor ich schlafe, lese ich.', spanish: 'Antes de dormir, leo.', keywords: ['bevor'], difficulty: 4, grammarTags: ['konj'] },
@@ -461,7 +461,7 @@ export const GRAMMAR_SYSTEMS = [
                 ]
             },
             {
-                id: 'b2-modal-part', icon: MessageCircle, name: 'Partículas Modales', desc: 'Dar vida al texto (halt, eben, doch, mal).',
+                id: 'b2-modal-part', icon: MessageCircle, name: 'Partículas Modales', desc: { es: 'Dar vida al texto (halt, eben, doch, mal).', en: 'Bringing text to life (halt, eben, doch, mal).' },
                 theory: [{ title: 'Partículas', content: 'Palabras que no se traducen literal pero dan intención o emoción a la frase.' }],
                 exercises: [
                     { id: 'g-b2-mod-01', german: 'Das ist halt so.', spanish: 'Es así y punto (resignación).', keywords: ['halt'], difficulty: 4, grammarTags: ['partikel'] },
@@ -474,14 +474,14 @@ export const GRAMMAR_SYSTEMS = [
 ];
 
 export const CHAPTERS = [
-    { id: 'cap1', title: 'Kapitel 1: Gute Reise!', icon: Plane, desc: 'Viajes, Perfekt' },
-    { id: 'cap2', title: 'Kapitel 2: Das ist ja praktisch', icon: Smartphone, desc: 'Tecnología, Separables' },
-    { id: 'cap3', title: 'Kapitel 3: Veränderungen', icon: Home, desc: 'Mudanza, Präteritum' },
-    { id: 'cap4', title: 'Kapitel 4: Arbeitswelt', icon: Briefcase, desc: 'Trabajo, Cortesía' },
-    { id: 'cap5', title: 'Kapitel 5: Umweltfreundlich?', icon: Leaf, desc: 'Ecología, Pasiva' },
-    { id: 'cap6', title: 'Kapitel 6: Blick nach vorn', icon: Telescope, desc: 'Futuro, Futur I' },
-    { id: 'cap7', title: 'Kapitel 7: Zwischenmenschliches', icon: Users, color: 'text-pink-600', borderColor: 'border-pink-600', desc: 'Relaciones, Conflictos y Plusquamperfekt' },
-    { id: 'exam-b1', title: 'Examen EOI B1.1', subtitle: 'Simulacro: Lesen, Hören, Schreiben', icon: GraduationCap, color: 'text-yellow-500', borderColor: 'border-yellow-500', route: '/examen-b1' },
+    { id: 'cap1', title: 'Kapitel 1: Gute Reise!', icon: Plane, desc: { es: 'Viajes, Perfekt', en: 'Travel, Perfekt' } },
+    { id: 'cap2', title: 'Kapitel 2: Das ist ja praktisch', icon: Smartphone, desc: { es: 'Tecnología, Separables', en: 'Technology, Separables' } },
+    { id: 'cap3', title: 'Kapitel 3: Veränderungen', icon: Home, desc: { es: 'Mudanza, Präteritum', en: 'Moving, Präteritum' } },
+    { id: 'cap4', title: 'Kapitel 4: Arbeitswelt', icon: Briefcase, desc: { es: 'Trabajo, Cortesía', en: 'Work, Courtesy' } },
+    { id: 'cap5', title: 'Kapitel 5: Umweltfreundlich?', icon: Leaf, desc: { es: 'Ecología, Pasiva', en: 'Ecology, Passive Voice' } },
+    { id: 'cap6', title: 'Kapitel 6: Blick nach vorn', icon: Telescope, desc: { es: 'Futuro, Futur I', en: 'Future, Futur I' } },
+    { id: 'cap7', title: 'Kapitel 7: Zwischenmenschliches', icon: Users, color: 'text-pink-600', borderColor: 'border-pink-600', desc: { es: 'Relaciones, Conflictos y Plusquamperfekt', en: 'Relationships, Conflicts & Plusquamperfekt' } },
+    { id: 'exam-b1', title: 'Examen EOI B1.1', subtitle: { es: 'Simulacro: Lesen, Hören, Schreiben', en: 'Mock Exam: Lesen, Hören, Schreiben' }, icon: GraduationCap, color: 'text-yellow-500', borderColor: 'border-yellow-500', route: '/examen-b1' },
 ];
 
 export const B1_CHUNKS: Chunk[] = [

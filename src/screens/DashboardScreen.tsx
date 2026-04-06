@@ -9,6 +9,7 @@ const DashboardScreen = () => {
     if (!context) return null;
     const { state, dispatch } = context;
     const t = useTranslation();
+    const baseLang = state.user?.baseLanguage ?? 'es';
 
     const isDark = state.user?.theme === 'dark';
 
@@ -98,7 +99,7 @@ const DashboardScreen = () => {
                             >
                                 <div className="flex items-center mb-3 text-indigo-500"><IconComponent size={32} /></div>
                                 <h3 className="text-xl font-bold mb-1">{chap.title}</h3>
-                                <p className="text-xs opacity-60">{chap.desc}</p>
+                                <p className="text-xs opacity-60">{typeof chap.desc === 'object' ? chap.desc[baseLang] : chap.desc}</p>
                             </div>
                         )
                     })}
